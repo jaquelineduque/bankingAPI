@@ -12,7 +12,7 @@ config :bank,
 
 # Add support for microseconds at the DB level
 # this avoids having to configure it on every migration file
-config :my_app, MyApp.Repo, migration_timestamps: [type: :utc_datetime_usec]
+config :bank, Bank.Repo, migration_timestamps: [type: :utc_datetime_usec]
 
 # Configures the endpoint
 config :bank, BankWeb.Endpoint,
