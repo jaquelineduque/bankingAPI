@@ -11,9 +11,12 @@ defmodule BankWeb.ClientRegisterView do
   end
 
   def render("client_register.json", %{client_register: client_register}) do
-    %{id: client_register.id,
+    %{
+      id: client_register.id,
       name: client_register.name,
       cpf: client_register.cpf,
-      date_of_birth: client_register.date_of_birth}
+      date_of_birth: client_register.date_of_birth,
+      user_id: client_register.user_id
+    }
   end
 end

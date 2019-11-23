@@ -3,11 +3,12 @@ defmodule Bank.Account.AccountRegister do
   import Ecto.Changeset
 
   schema "account_register" do
+    belongs_to :user, User
     field :accounnt_number, :string
     field :active, :boolean, default: false
     field :agency_number, :string
     field :opening_date, :date
-    field :user_id, :id
+    # field :user_id, :id
 
     timestamps()
   end
