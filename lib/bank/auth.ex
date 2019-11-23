@@ -113,11 +113,42 @@ defmodule Bank.Auth do
     {:error, "Wrong email or password"}
   end
 
+  alias Bank.Services.Authenticator
+
   defp verify_password(user, password) do
     if Bcrypt.verify_pass(password, user.password_hash) do
+      # ->
       {:ok, user}
+      token = Authenticator.generate_token(user)
+      Repo.insert(Ecto.build_assoc(user, :auth_tokens, %{token: token}))
     else
+      # token = Authenticator.generate_token(user)
+      # Repo.insert(Ecto.build_assoc(user, :auth_tokens, %{token: token}))
       {:error, "Wrong email or password"}
+    end
+  end
+
+  #  def sign_in(email, password) do
+  #    case Comeonin.Bcrypt.check_pass(Repo.get_by(User, email: email), password) do
+  #      {:ok, user} ->
+  #        token = Authenticator.generate_token(user)
+  #        Repo.insert(Ecto.build_assoc(user, :auth_tokens, %{token: token}))#
+
+  #      err ->
+  #        err
+  #    end
+  #  end
+
+  def sign_out(conn) do
+    case Authenticator.get_auth_token(conn) do
+      {:ok, token} ->
+        case Repo.get_by(AuthToken, %{token: token}) do
+          nil -> {:error, :not_found}
+          auth_token -> Repo.delete(auth_token)
+        end
+
+      error ->
+        error
     end
   end
 end

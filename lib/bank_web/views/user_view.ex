@@ -19,7 +19,7 @@ defmodule BankWeb.UserView do
       data: %{
         user: %{
           id: user.id,
-          email: user.email
+          token: user.token
         }
       }
     }

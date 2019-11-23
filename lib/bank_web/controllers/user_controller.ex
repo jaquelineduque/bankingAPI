@@ -56,4 +56,8 @@ defmodule BankWeb.UserController do
         |> render("401.json", message: message)
     end
   end
+
+  def valor_fixo(conn, _params) do
+    send_resp(conn, :ok, "")
+  end
 end

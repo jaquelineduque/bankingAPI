@@ -7,6 +7,7 @@ defmodule Bank.Auth.User do
     field :is_active, :boolean, default: false
     field :password, :string, virtual: true
     field :password_hash, :string
+    has_many :auth_tokens, Bank.AuthToken
 
     # Add support for microseconds at the language level
     # for this specific schema
