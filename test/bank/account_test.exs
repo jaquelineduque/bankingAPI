@@ -7,7 +7,11 @@ defmodule Bank.AccountTest do
     alias Bank.Account.ClientRegister
 
     @valid_attrs %{cpf: "some cpf", date_of_birth: ~D[2010-04-17], name: "some name"}
-    @update_attrs %{cpf: "some updated cpf", date_of_birth: ~D[2011-05-18], name: "some updated name"}
+    @update_attrs %{
+      cpf: "some updated cpf",
+      date_of_birth: ~D[2011-05-18],
+      name: "some updated name"
+    }
     @invalid_attrs %{cpf: nil, date_of_birth: nil, name: nil}
 
     def client_register_fixture(attrs \\ %{}) do
@@ -30,7 +34,9 @@ defmodule Bank.AccountTest do
     end
 
     test "create_client_register/1 with valid data creates a client_register" do
-      assert {:ok, %ClientRegister{} = client_register} = Account.create_client_register(@valid_attrs)
+      assert {:ok, %ClientRegister{} = client_register} =
+               Account.create_client_register(@valid_attrs)
+
       assert client_register.cpf == "some cpf"
       assert client_register.date_of_birth == ~D[2010-04-17]
       assert client_register.name == "some name"
@@ -42,7 +48,10 @@ defmodule Bank.AccountTest do
 
     test "update_client_register/2 with valid data updates the client_register" do
       client_register = client_register_fixture()
-      assert {:ok, %ClientRegister{} = client_register} = Account.update_client_register(client_register, @update_attrs)
+
+      assert {:ok, %ClientRegister{} = client_register} =
+               Account.update_client_register(client_register, @update_attrs)
+
       assert client_register.cpf == "some updated cpf"
       assert client_register.date_of_birth == ~D[2011-05-18]
       assert client_register.name == "some updated name"
@@ -50,7 +59,10 @@ defmodule Bank.AccountTest do
 
     test "update_client_register/2 with invalid data returns error changeset" do
       client_register = client_register_fixture()
-      assert {:error, %Ecto.Changeset{}} = Account.update_client_register(client_register, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Account.update_client_register(client_register, @invalid_attrs)
+
       assert client_register == Account.get_client_register!(client_register.id)
     end
 
@@ -69,9 +81,19 @@ defmodule Bank.AccountTest do
   describe "account_register" do
     alias Bank.Account.AccountRegister
 
-    @valid_attrs %{accounnt_number: "some accounnt_number", active: true, agency_number: "some agency_number", opening_date: ~D[2010-04-17]}
-    @update_attrs %{accounnt_number: "some updated accounnt_number", active: false, agency_number: "some updated agency_number", opening_date: ~D[2011-05-18]}
-    @invalid_attrs %{accounnt_number: nil, active: nil, agency_number: nil, opening_date: nil}
+    @valid_attrs %{
+      account_number: "some account_number",
+      active: true,
+      agency_number: "some agency_number",
+      opening_date: ~D[2010-04-17]
+    }
+    @update_attrs %{
+      account_number: "some updated account_number",
+      active: false,
+      agency_number: "some updated agency_number",
+      opening_date: ~D[2011-05-18]
+    }
+    @invalid_attrs %{account_number: nil, active: nil, agency_number: nil, opening_date: nil}
 
     def account_register_fixture(attrs \\ %{}) do
       {:ok, account_register} =
@@ -93,8 +115,10 @@ defmodule Bank.AccountTest do
     end
 
     test "create_account_register/1 with valid data creates a account_register" do
-      assert {:ok, %AccountRegister{} = account_register} = Account.create_account_register(@valid_attrs)
-      assert account_register.accounnt_number == "some accounnt_number"
+      assert {:ok, %AccountRegister{} = account_register} =
+               Account.create_account_register(@valid_attrs)
+
+      assert account_register.account_number == "some account_number"
       assert account_register.active == true
       assert account_register.agency_number == "some agency_number"
       assert account_register.opening_date == ~D[2010-04-17]
@@ -106,8 +130,11 @@ defmodule Bank.AccountTest do
 
     test "update_account_register/2 with valid data updates the account_register" do
       account_register = account_register_fixture()
-      assert {:ok, %AccountRegister{} = account_register} = Account.update_account_register(account_register, @update_attrs)
-      assert account_register.accounnt_number == "some updated accounnt_number"
+
+      assert {:ok, %AccountRegister{} = account_register} =
+               Account.update_account_register(account_register, @update_attrs)
+
+      assert account_register.account_number == "some updated account_number"
       assert account_register.active == false
       assert account_register.agency_number == "some updated agency_number"
       assert account_register.opening_date == ~D[2011-05-18]
@@ -115,14 +142,20 @@ defmodule Bank.AccountTest do
 
     test "update_account_register/2 with invalid data returns error changeset" do
       account_register = account_register_fixture()
-      assert {:error, %Ecto.Changeset{}} = Account.update_account_register(account_register, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Account.update_account_register(account_register, @invalid_attrs)
+
       assert account_register == Account.get_account_register!(account_register.id)
     end
 
     test "delete_account_register/1 deletes the account_register" do
       account_register = account_register_fixture()
       assert {:ok, %AccountRegister{}} = Account.delete_account_register(account_register)
-      assert_raise Ecto.NoResultsError, fn -> Account.get_account_register!(account_register.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Account.get_account_register!(account_register.id)
+      end
     end
 
     test "change_account_register/1 returns a account_register changeset" do

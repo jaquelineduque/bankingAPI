@@ -5,18 +5,18 @@ defmodule BankWeb.AccountRegisterControllerTest do
   alias Bank.Account.AccountRegister
 
   @create_attrs %{
-    accounnt_number: "some accounnt_number",
+    account_number: "some account_number",
     active: true,
     agency_number: "some agency_number",
     opening_date: ~D[2010-04-17]
   }
   @update_attrs %{
-    accounnt_number: "some updated accounnt_number",
+    account_number: "some updated account_number",
     active: false,
     agency_number: "some updated agency_number",
     opening_date: ~D[2011-05-18]
   }
-  @invalid_attrs %{accounnt_number: nil, active: nil, agency_number: nil, opening_date: nil}
+  @invalid_attrs %{account_number: nil, active: nil, agency_number: nil, opening_date: nil}
 
   def fixture(:account_register) do
     {:ok, account_register} = Account.create_account_register(@create_attrs)
@@ -36,14 +36,16 @@ defmodule BankWeb.AccountRegisterControllerTest do
 
   describe "create account_register" do
     test "renders account_register when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.account_register_path(conn, :create), account_register: @create_attrs)
+      conn =
+        post(conn, Routes.account_register_path(conn, :create), account_register: @create_attrs)
+
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.account_register_path(conn, :show, id))
 
       assert %{
                "id" => id,
-               "accounnt_number" => "some accounnt_number",
+               "account_number" => "some account_number",
                "active" => true,
                "agency_number" => "some agency_number",
                "opening_date" => "2010-04-17"
@@ -51,7 +53,9 @@ defmodule BankWeb.AccountRegisterControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.account_register_path(conn, :create), account_register: @invalid_attrs)
+      conn =
+        post(conn, Routes.account_register_path(conn, :create), account_register: @invalid_attrs)
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -59,15 +63,22 @@ defmodule BankWeb.AccountRegisterControllerTest do
   describe "update account_register" do
     setup [:create_account_register]
 
-    test "renders account_register when data is valid", %{conn: conn, account_register: %AccountRegister{id: id} = account_register} do
-      conn = put(conn, Routes.account_register_path(conn, :update, account_register), account_register: @update_attrs)
+    test "renders account_register when data is valid", %{
+      conn: conn,
+      account_register: %AccountRegister{id: id} = account_register
+    } do
+      conn =
+        put(conn, Routes.account_register_path(conn, :update, account_register),
+          account_register: @update_attrs
+        )
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.account_register_path(conn, :show, id))
 
       assert %{
                "id" => id,
-               "accounnt_number" => "some updated accounnt_number",
+               "account_number" => "some updated account_number",
                "active" => false,
                "agency_number" => "some updated agency_number",
                "opening_date" => "2011-05-18"
@@ -75,7 +86,11 @@ defmodule BankWeb.AccountRegisterControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, account_register: account_register} do
-      conn = put(conn, Routes.account_register_path(conn, :update, account_register), account_register: @invalid_attrs)
+      conn =
+        put(conn, Routes.account_register_path(conn, :update, account_register),
+          account_register: @invalid_attrs
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

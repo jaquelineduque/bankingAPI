@@ -11,10 +11,12 @@ defmodule BankWeb.AccountRegisterView do
   end
 
   def render("account_register.json", %{account_register: account_register}) do
-    %{id: account_register.id,
+    %{
+      id: account_register.id,
       agency_number: account_register.agency_number,
-      accounnt_number: account_register.accounnt_number,
+      account_number: account_register.account_number,
       active: account_register.active,
-      opening_date: account_register.opening_date}
+      opening_date: account_register.opening_date
+    }
   end
 end
