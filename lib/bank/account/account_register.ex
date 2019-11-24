@@ -4,6 +4,7 @@ defmodule Bank.Account.AccountRegister do
 
   alias Bank.User
   alias Bank.Account.Helper, as: Helper
+  alias Bank.Account.AccountBalance, as: AccountBalance
 
   schema "account_register" do
     belongs_to :user, User
@@ -11,6 +12,7 @@ defmodule Bank.Account.AccountRegister do
     field :active, :boolean, default: false
     field :agency_number, :string
     field :opening_date, :date
+    has_many :account_balance, AccountBalance
     # field :user_id, :id
 
     timestamps()

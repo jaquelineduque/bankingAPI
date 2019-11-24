@@ -12,7 +12,8 @@ defmodule BankWeb.AccountRegisterController do
   end
 
   def create(conn, %{"account_register" => account_register_params}) do
-    with {:ok, %AccountRegister{} = account_register} <- Account.create_account_register(account_register_params) do
+    with {:ok, %AccountRegister{} = account_register} <-
+           Account.create_account_register(account_register_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.account_register_path(conn, :show, account_register))
@@ -28,7 +29,8 @@ defmodule BankWeb.AccountRegisterController do
   def update(conn, %{"id" => id, "account_register" => account_register_params}) do
     account_register = Account.get_account_register!(id)
 
-    with {:ok, %AccountRegister{} = account_register} <- Account.update_account_register(account_register, account_register_params) do
+    with {:ok, %AccountRegister{} = account_register} <-
+           Account.update_account_register(account_register, account_register_params) do
       render(conn, "show.json", account_register: account_register)
     end
   end
@@ -38,6 +40,16 @@ defmodule BankWeb.AccountRegisterController do
 
     with {:ok, %AccountRegister{}} <- Account.delete_account_register(account_register) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def activate(conn, %{"account_id" => account_id}) do
+    account_register = Account.get_account_register!(account_id)
+
+    with {:ok, %AccountRegister{}} <- Account.activate_account_register(account_register) do
+      render(conn, "show.json", account_register: account_register)
+      # send_resp(conn, :ok, "")
+      # render(conn, "show.json", account_register: account_register)
     end
   end
 end

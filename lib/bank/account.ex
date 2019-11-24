@@ -197,4 +197,124 @@ defmodule Bank.Account do
   def change_account_register(%AccountRegister{} = account_register) do
     AccountRegister.changeset(account_register, %{})
   end
+
+  alias Bank.Account.AccountBalance
+
+  @doc """
+  Returns the list of account_balance.
+
+  ## Examples
+
+      iex> list_account_balance()
+      [%AccountBalance{}, ...]
+
+  """
+  def list_account_balance do
+    Repo.all(AccountBalance)
+  end
+
+  @doc """
+  Gets a single account_balance.
+
+  Raises `Ecto.NoResultsError` if the Account balance does not exist.
+
+  ## Examples
+
+      iex> get_account_balance!(123)
+      %AccountBalance{}
+
+      iex> get_account_balance!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_account_balance!(id), do: Repo.get!(AccountBalance, id)
+
+  @doc """
+  Creates a account_balance.
+
+  ## Examples
+
+      iex> create_account_balance(%{field: value})
+      {:ok, %AccountBalance{}}
+
+      iex> create_account_balance(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_account_balance(attrs \\ %{}) do
+    %AccountBalance{}
+    |> AccountBalance.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a account_balance.
+
+  ## Examples
+
+      iex> update_account_balance(account_balance, %{field: new_value})
+      {:ok, %AccountBalance{}}
+
+      iex> update_account_balance(account_balance, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_account_balance(%AccountBalance{} = account_balance, attrs) do
+    account_balance
+    |> AccountBalance.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a AccountBalance.
+
+  ## Examples
+
+      iex> delete_account_balance(account_balance)
+      {:ok, %AccountBalance{}}
+
+      iex> delete_account_balance(account_balance)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_account_balance(%AccountBalance{} = account_balance) do
+    Repo.delete(account_balance)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking account_balance changes.
+
+  ## Examples
+
+      iex> change_account_balance(account_balance)
+      %Ecto.Changeset{source: %AccountBalance{}}
+
+  """
+  def change_account_balance(%AccountBalance{} = account_balance) do
+    AccountBalance.changeset(account_balance, %{})
+  end
+
+  def activate_account_register(%AccountRegister{} = account_register) do
+    actual_date = Date.utc_today()
+
+    Repo.transaction(fn ->
+      # account_register =
+      from(a in AccountRegister,
+        where: a.id == ^account_register.id,
+        update: [set: [active: true, opening_date: ^actual_date]]
+      )
+      |> Repo.update_all([])
+
+      # |> Repo.preload(:user)
+
+      # |> Repo.preload(:user)
+
+      # Repo.update_all(%AccountRegister{active: true, opening_date: Date.utc_today()})
+
+      balance_amount = Ecto.build_assoc(account_register, :account_balance, balance_amount: 1000)
+
+      Repo.insert!(balance_amount)
+      |> Repo.preload(:account_register)
+    end)
+  end
 end

@@ -163,4 +163,63 @@ defmodule Bank.AccountTest do
       assert %Ecto.Changeset{} = Account.change_account_register(account_register)
     end
   end
+
+  describe "account_balance" do
+    alias Bank.Account.AccountBalance
+
+    @valid_attrs %{balance_amount: "120.5"}
+    @update_attrs %{balance_amount: "456.7"}
+    @invalid_attrs %{balance_amount: nil}
+
+    def account_balance_fixture(attrs \\ %{}) do
+      {:ok, account_balance} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Account.create_account_balance()
+
+      account_balance
+    end
+
+    test "list_account_balance/0 returns all account_balance" do
+      account_balance = account_balance_fixture()
+      assert Account.list_account_balance() == [account_balance]
+    end
+
+    test "get_account_balance!/1 returns the account_balance with given id" do
+      account_balance = account_balance_fixture()
+      assert Account.get_account_balance!(account_balance.id) == account_balance
+    end
+
+    test "create_account_balance/1 with valid data creates a account_balance" do
+      assert {:ok, %AccountBalance{} = account_balance} = Account.create_account_balance(@valid_attrs)
+      assert account_balance.balance_amount == Decimal.new("120.5")
+    end
+
+    test "create_account_balance/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_account_balance(@invalid_attrs)
+    end
+
+    test "update_account_balance/2 with valid data updates the account_balance" do
+      account_balance = account_balance_fixture()
+      assert {:ok, %AccountBalance{} = account_balance} = Account.update_account_balance(account_balance, @update_attrs)
+      assert account_balance.balance_amount == Decimal.new("456.7")
+    end
+
+    test "update_account_balance/2 with invalid data returns error changeset" do
+      account_balance = account_balance_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_account_balance(account_balance, @invalid_attrs)
+      assert account_balance == Account.get_account_balance!(account_balance.id)
+    end
+
+    test "delete_account_balance/1 deletes the account_balance" do
+      account_balance = account_balance_fixture()
+      assert {:ok, %AccountBalance{}} = Account.delete_account_balance(account_balance)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_account_balance!(account_balance.id) end
+    end
+
+    test "change_account_balance/1 returns a account_balance changeset" do
+      account_balance = account_balance_fixture()
+      assert %Ecto.Changeset{} = Account.change_account_balance(account_balance)
+    end
+  end
 end
