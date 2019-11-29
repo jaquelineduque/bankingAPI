@@ -4,7 +4,7 @@ defmodule Bank.Account.ClientRegister do
   alias Bank.User
 
   schema "client_register" do
-    belongs_to :user, User
+    belongs_to :user, Bank.User
     field :cpf, :string
     field :date_of_birth, :date
     field :name, :string

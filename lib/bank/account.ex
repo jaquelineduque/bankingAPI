@@ -5,6 +5,8 @@ defmodule Bank.Account do
 
   import Ecto.Query, warn: false
   alias Bank.Repo
+  alias Bank.Account.AccountBalance, as: AccountBalance
+  alias Bank.Account.AccountRegister, as: AccountRegister
 
   alias Bank.Account.ClientRegister
 
@@ -297,24 +299,33 @@ defmodule Bank.Account do
   def activate_account_register(%AccountRegister{} = account_register) do
     actual_date = Date.utc_today()
 
-    Repo.transaction(fn ->
-      # account_register =
-      from(a in AccountRegister,
-        where: a.id == ^account_register.id,
-        update: [set: [active: true, opening_date: ^actual_date]]
-      )
-      |> Repo.update_all([])
+    account_register = Bank.Repo.get!(AccountRegister, account_register.id)
 
-      # |> Repo.preload(:user)
+    balance_register = %AccountBalance{}
 
-      # |> Repo.preload(:user)
+    Ecto.Multi.new()
+    |> Ecto.Multi.insert(
+      :account_balance,
+      AccountBalance.changeset(balance_register, %{
+        account_register_id: account_register.id,
+        balance_amount: 1000
+      })
+    )
+    |> Ecto.Multi.update(
+      :account_register,
+      AccountRegister.changeset(account_register, %{
+        active: true,
+        opening_date: actual_date,
+        user_id: account_register.user_id
+      })
+    )
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{account_register: account_register}} ->
+        {:ok, account_register}
 
-      # Repo.update_all(%AccountRegister{active: true, opening_date: Date.utc_today()})
-
-      balance_amount = Ecto.build_assoc(account_register, :account_balance, balance_amount: 1000)
-
-      Repo.insert!(balance_amount)
-      |> Repo.preload(:account_register)
-    end)
+      {:error, _, reason, _} ->
+        {:error, reason}
+    end
   end
 end

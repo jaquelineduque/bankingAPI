@@ -46,10 +46,9 @@ defmodule BankWeb.AccountRegisterController do
   def activate(conn, %{"account_id" => account_id}) do
     account_register = Account.get_account_register!(account_id)
 
-    with {:ok, %AccountRegister{}} <- Account.activate_account_register(account_register) do
+    with {:ok, %AccountRegister{} = account_register} <-
+           Account.activate_account_register(account_register) do
       render(conn, "show.json", account_register: account_register)
-      # send_resp(conn, :ok, "")
-      # render(conn, "show.json", account_register: account_register)
     end
   end
 end
