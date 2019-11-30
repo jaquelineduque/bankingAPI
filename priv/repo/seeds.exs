@@ -11,23 +11,36 @@
 # and so on) as they will fail if something goes wrong.
 alias Bank.Repo
 alias Bank.FinancialOperationType
+alias Bank.FinancialMovimentType
 
+# Populating - FinancialOperationType
 Repo.insert!(%FinancialOperationType{
-  code: 1,
+  id: 1,
   description: "Saque"
 })
 
 Repo.insert!(%FinancialOperationType{
-  code: 2,
+  id: 2,
   description: "Depósito"
 })
 
 Repo.insert!(%FinancialOperationType{
-  code: 3,
+  id: 3,
   description: "Transferência"
 })
 
 Repo.insert!(%FinancialOperationType{
-  code: 4,
+  id: 4,
   description: "Débito automático"
+})
+
+# Populating - FinancialOperationType
+Repo.insert!(%FinancialMovimentType{
+  id: 1,
+  description: "Crédito"
+})
+
+Repo.insert!(%FinancialMovimentType{
+  id: 2,
+  description: "Débito"
 })
