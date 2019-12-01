@@ -18,9 +18,16 @@ defmodule BankWeb.Router do
 
   scope "/api", BankWeb do
     pipe_through :authenticate
+    post "/withdraw", FinancialMovimentController, :create_withdraw
     resources "/account/client", ClientRegisterController, except: [:new, :edit]
+
+    #    resources "/account/withdraw", FinancialMovimentController,
+    #      except: [:new, :edit, :update, :delete]
+
     resources "/account", AccountRegisterController, except: [:new, :edit]
     post "/account/activate", AccountRegisterController, :activate
+    # get "/account/withdraw", FinancialMovimentController, :show
+    # post "/account/withdraw", FinancialMovimentController, :create
   end
 
   scope "/restricted", BankWeb do

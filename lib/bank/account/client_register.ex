@@ -10,7 +10,7 @@ defmodule Bank.Account.ClientRegister do
     field :name, :string
     # field :user_id, :id
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
   end
 
   @doc false

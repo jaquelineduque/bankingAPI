@@ -328,4 +328,8 @@ defmodule Bank.Account do
         {:error, reason}
     end
   end
+
+  def get_account_balance(account_register_id) do
+    Repo.get_by!(AccountBalance, account_register_id: account_register_id)
+  end
 end
