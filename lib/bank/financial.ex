@@ -121,7 +121,7 @@ defmodule Bank.Financial do
     # if 1 < 9 do
     if Decimal.lt?(balance_register.balance_amount, financial_moviment.moviment_amount) do
       # Não prosseguir e gerar mensagem de saldo insuficiente
-      {:error, "Saldo insuficiente"}
+      {:error, %{code: 1001, detail: "Saldo insuficiente"}}
     else
       new_balance =
         Decimal.sub(balance_register.balance_amount, financial_moviment.moviment_amount)

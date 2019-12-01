@@ -21,7 +21,7 @@ defmodule BankWeb.FinancialMovimentView do
 
   def render("error.json", %{error: error}) do
     %{
-      errors: %{detail: error}
+      errors: error
     }
   end
 end

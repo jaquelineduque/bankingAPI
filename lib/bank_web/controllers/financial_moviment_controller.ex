@@ -55,10 +55,10 @@ defmodule BankWeb.FinancialMovimentController do
         |> put_status(:created)
         |> render("show.json", financial_moviment: financial_moviment)
 
-      {:error, "Saldo insuficiente"} ->
+      {:error, %{code: 1001}} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render("error.json", error: "Saldo insuficiente")
+        |> render("error.json", error: %{code: 1001, detail: "Saldo insuficiente"})
     end
   end
 
