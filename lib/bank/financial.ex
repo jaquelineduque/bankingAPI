@@ -113,7 +113,7 @@ defmodule Bank.Financial do
 
     # financial_moviment = attrs
 
-    actual_datetime = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
+    actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
@@ -138,7 +138,7 @@ defmodule Bank.Financial do
         :financial_moviment,
         FinancialMoviment.changeset(financial_moviment, %{
           moviment_amount: financial_moviment.moviment_amount,
-          # moviment_date: actual_datetime,
+          moviment_date: actual_datetime,
           moviment_description: financial_moviment.moviment_description,
           account_register_id: financial_moviment.account_register_id,
           id_operation_type: 1,

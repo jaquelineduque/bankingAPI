@@ -4,7 +4,7 @@ defmodule Bank.Repo.Migrations.CreateFinancialMoviment do
   def change do
     create table(:financial_moviment) do
       add :moviment_amount, :decimal
-      add :moviment_date, :naive_datetime_usec
+      add :moviment_date, :utc_datetime_usec
       add :moviment_description, :text
       add :account_register_id, references(:account_register, on_delete: :nothing)
       add :id_operation_type, references(:financial_operation_type, on_delete: :nothing)

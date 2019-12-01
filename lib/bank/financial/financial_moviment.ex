@@ -4,7 +4,7 @@ defmodule Bank.Financial.FinancialMoviment do
 
   schema "financial_moviment" do
     field :moviment_amount, :decimal
-    field :moviment_date, :naive_datetime_usec
+    field :moviment_date, :utc_datetime_usec
     field :moviment_description, :string
     field :account_register_id, :id
     field :id_operation_type, :id
