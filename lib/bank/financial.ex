@@ -117,39 +117,42 @@ defmodule Bank.Financial do
     account_register_id = financial_moviment.account_register_id
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
-    if balance_register.balance_amount < financial_moviment.moviment_amount do
+    # if balance_register.balance_amount < financial_moviment.moviment_amount do
+    # if 1 < 9 do
+    if Decimal.lt?(balance_register.balance_amount, financial_moviment.moviment_amount) do
       # Não prosseguir e gerar mensagem de saldo insuficiente
       {:error, "Saldo insuficiente"}
-    end
+    else
+      new_balance =
+        Decimal.sub(balance_register.balance_amount, financial_moviment.moviment_amount)
 
-    new_balance = Decimal.sub(balance_register.balance_amount, financial_moviment.moviment_amount)
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(
+        :balance_register,
+        AccountBalance.changeset(balance_register, %{
+          account_register_id: financial_moviment.account_register_id,
+          balance_amount: new_balance
+        })
+      )
+      |> Ecto.Multi.insert(
+        :financial_moviment,
+        FinancialMoviment.changeset(financial_moviment, %{
+          moviment_amount: financial_moviment.moviment_amount,
+          # moviment_date: actual_datetime,
+          moviment_description: financial_moviment.moviment_description,
+          account_register_id: financial_moviment.account_register_id,
+          id_operation_type: 1,
+          id_moviment_type: 2
+        })
+      )
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{financial_moviment: financial_moviment}} ->
+          {:ok, financial_moviment}
 
-    Ecto.Multi.new()
-    |> Ecto.Multi.update(
-      :balance_register,
-      AccountBalance.changeset(balance_register, %{
-        account_register_id: financial_moviment.account_register_id,
-        balance_amount: new_balance
-      })
-    )
-    |> Ecto.Multi.insert(
-      :financial_moviment,
-      FinancialMoviment.changeset(financial_moviment, %{
-        moviment_amount: financial_moviment.moviment_amount,
-        # moviment_date: actual_datetime,
-        moviment_description: financial_moviment.moviment_description,
-        account_register_id: financial_moviment.account_register_id,
-        id_operation_type: 1,
-        id_moviment_type: 2
-      })
-    )
-    |> Repo.transaction()
-    |> case do
-      {:ok, %{financial_moviment: financial_moviment}} ->
-        {:ok, financial_moviment}
-
-      {:error, _, reason, _} ->
-        {:error, reason}
+        {:error, _, reason, _} ->
+          {:error, reason}
+      end
     end
   end
 end
