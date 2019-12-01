@@ -18,4 +18,10 @@ defmodule BankWeb.FinancialMovimentView do
       moviment_description: financial_moviment.moviment_description
     }
   end
+
+  def render("error.json", %{error: error}) do
+    %{
+      errors: %{detail: error}
+    }
+  end
 end

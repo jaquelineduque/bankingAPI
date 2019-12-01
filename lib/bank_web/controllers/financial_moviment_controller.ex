@@ -49,11 +49,16 @@ defmodule BankWeb.FinancialMovimentController do
   def create_withdraw(conn, %{"financial_moviment" => financial_moviment_params}) do
     financial_moviment = to_struct(%FinancialMoviment{}, financial_moviment_params)
 
-    with {:ok, %FinancialMoviment{} = financial_moviment} <-
-           Financial.create_withdraw(financial_moviment) do
-      conn
-      |> put_status(:created)
-      |> render("show.json", financial_moviment: financial_moviment)
+    case Financial.create_withdraw(financial_moviment) do
+      {:ok, %FinancialMoviment{} = financial_moviment} ->
+        conn
+        |> put_status(:created)
+        |> render("show.json", financial_moviment: financial_moviment)
+
+      {:error, "Saldo insuficiente"} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render("error.json", error: "Saldo insuficiente")
     end
   end
 
