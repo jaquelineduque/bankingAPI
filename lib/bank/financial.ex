@@ -152,5 +152,39 @@ defmodule Bank.Financial do
   end
 
   def create_deposit(%FinancialMoviment{} = financial_moviment) do
+    actual_datetime = DateTime.utc_now()
+    account_register_id = financial_moviment.account_register_id
+
+    balance_register = Bank.Account.get_account_balance(account_register_id)
+
+    new_balance = Decimal.add(balance_register.balance_amount, financial_moviment.moviment_amount)
+
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(
+      :balance_register,
+      AccountBalance.changeset(balance_register, %{
+        account_register_id: financial_moviment.account_register_id,
+        balance_amount: new_balance
+      })
+    )
+    |> Ecto.Multi.insert(
+      :financial_moviment,
+      FinancialMoviment.changeset(financial_moviment, %{
+        moviment_amount: financial_moviment.moviment_amount,
+        moviment_date: actual_datetime,
+        moviment_description: financial_moviment.moviment_description,
+        account_register_id: financial_moviment.account_register_id,
+        id_operation_type: 2,
+        id_moviment_type: 1
+      })
+    )
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{financial_moviment: financial_moviment}} ->
+        {:ok, financial_moviment}
+
+      {:error, _, reason, _} ->
+        {:error, reason}
+    end
   end
 end
