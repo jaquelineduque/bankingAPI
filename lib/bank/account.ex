@@ -332,4 +332,9 @@ defmodule Bank.Account do
   def get_account_balance(account_register_id) do
     Repo.get_by!(AccountBalance, account_register_id: account_register_id)
   end
+
+  def is_account_active(id) do
+    account_register = get_account_register!(id)
+    account_register.active
+  end
 end

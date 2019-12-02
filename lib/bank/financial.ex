@@ -104,21 +104,16 @@ defmodule Bank.Financial do
     FinancialMoviment.changeset(financial_moviment, %{})
   end
 
-  # %{financial_moviment: financial_moviment}
+  def is_account_active(id) do
+    account_register = get_financial_moviment!(id)
+    account_register.active
+  end
+
   def create_withdraw(%FinancialMoviment{} = financial_moviment) do
-    # def create_withdraw(%FinancialMoviment{} = financial_moviment) do
-    # def create_withdraw(%FinancialMoviment{} = financial_moviment) do
-    #    {:ok, %FinancialMoviment{} = financial_moviment} <-
-    #      FinancialMoviment.changeset(attrs)
-
-    # financial_moviment = attrs
-
     actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
-    # if balance_register.balance_amount < financial_moviment.moviment_amount do
-    # if 1 < 9 do
     if Decimal.lt?(balance_register.balance_amount, financial_moviment.moviment_amount) do
       # Não prosseguir e gerar mensagem de saldo insuficiente
       {:error, %{code: 1001, detail: "Saldo insuficiente"}}
@@ -154,5 +149,8 @@ defmodule Bank.Financial do
           {:error, reason}
       end
     end
+  end
+
+  def create_deposit(%FinancialMoviment{} = financial_moviment) do
   end
 end
