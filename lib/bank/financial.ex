@@ -106,8 +106,9 @@ defmodule Bank.Financial do
 
   def create_simple_financial_moviment(
         %FinancialMoviment{} = financial_moviment,
-        balance_attr,
-        financial_moviment_attr
+        new_balance,
+        operation_type,
+        moviment_type
       ) do
     actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
@@ -116,11 +117,21 @@ defmodule Bank.Financial do
     Ecto.Multi.new()
     |> Ecto.Multi.update(
       :balance_register,
-      AccountBalance.changeset(balance_register, balance_attr)
+      AccountBalance.changeset(balance_register, %{
+        account_register_id: financial_moviment.account_register_id,
+        balance_amount: new_balance
+      })
     )
     |> Ecto.Multi.insert(
       :financial_moviment,
-      FinancialMoviment.changeset(financial_moviment, financial_moviment_attr)
+      FinancialMoviment.changeset(financial_moviment, %{
+        moviment_amount: financial_moviment.moviment_amount,
+        moviment_date: actual_datetime,
+        moviment_description: financial_moviment.moviment_description,
+        account_register_id: financial_moviment.account_register_id,
+        id_operation_type: operation_type,
+        id_moviment_type: moviment_type
+      })
     )
     |> Repo.transaction()
     |> case do
@@ -133,7 +144,6 @@ defmodule Bank.Financial do
   end
 
   def create_withdraw(%FinancialMoviment{} = financial_moviment) do
-    actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
@@ -146,24 +156,14 @@ defmodule Bank.Financial do
 
       create_simple_financial_moviment(
         financial_moviment,
-        %{
-          account_register_id: financial_moviment.account_register_id,
-          balance_amount: new_balance
-        },
-        %{
-          moviment_amount: financial_moviment.moviment_amount,
-          moviment_date: actual_datetime,
-          moviment_description: financial_moviment.moviment_description,
-          account_register_id: financial_moviment.account_register_id,
-          id_operation_type: 1,
-          id_moviment_type: 2
-        }
+        new_balance,
+        1,
+        2
       )
     end
   end
 
   def create_deposit(%FinancialMoviment{} = financial_moviment) do
-    actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
 
     balance_register = Bank.Account.get_account_balance(account_register_id)
@@ -172,18 +172,9 @@ defmodule Bank.Financial do
 
     create_simple_financial_moviment(
       financial_moviment,
-      %{
-        account_register_id: financial_moviment.account_register_id,
-        balance_amount: new_balance
-      },
-      %{
-        moviment_amount: financial_moviment.moviment_amount,
-        moviment_date: actual_datetime,
-        moviment_description: financial_moviment.moviment_description,
-        account_register_id: financial_moviment.account_register_id,
-        id_operation_type: 2,
-        id_moviment_type: 1
-      }
+      new_balance,
+      2,
+      1
     )
   end
 
@@ -201,18 +192,9 @@ defmodule Bank.Financial do
 
       create_simple_financial_moviment(
         financial_moviment,
-        %{
-          account_register_id: financial_moviment.account_register_id,
-          balance_amount: new_balance
-        },
-        %{
-          moviment_amount: financial_moviment.moviment_amount,
-          moviment_date: actual_datetime,
-          moviment_description: financial_moviment.moviment_description,
-          account_register_id: financial_moviment.account_register_id,
-          id_operation_type: 4,
-          id_moviment_type: 2
-        }
+        new_balance,
+        4,
+        2
       )
     end
   end
