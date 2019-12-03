@@ -179,7 +179,6 @@ defmodule Bank.Financial do
   end
 
   def create_debit(%FinancialMoviment{} = financial_moviment) do
-    actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
