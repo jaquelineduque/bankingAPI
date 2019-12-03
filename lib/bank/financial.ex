@@ -104,7 +104,7 @@ defmodule Bank.Financial do
     FinancialMoviment.changeset(financial_moviment, %{})
   end
 
-  def process_financial_moviment(
+  def create_simple_financial_moviment(
         %FinancialMoviment{} = financial_moviment,
         balance_attr,
         financial_moviment_attr
@@ -144,7 +144,7 @@ defmodule Bank.Financial do
       new_balance =
         Decimal.sub(balance_register.balance_amount, financial_moviment.moviment_amount)
 
-      process_financial_moviment(
+      create_simple_financial_moviment(
         financial_moviment,
         %{
           account_register_id: financial_moviment.account_register_id,
@@ -170,7 +170,7 @@ defmodule Bank.Financial do
 
     new_balance = Decimal.add(balance_register.balance_amount, financial_moviment.moviment_amount)
 
-    process_financial_moviment(
+    create_simple_financial_moviment(
       financial_moviment,
       %{
         account_register_id: financial_moviment.account_register_id,
