@@ -81,7 +81,29 @@ defmodule BankWeb.FinancialMovimentController do
     else
       conn
       |> put_status(:unprocessable_entity)
-      |> render("error.json", error: %{code: 1012, detail: "Conta inativa"})
+      |> render("error.json", error: %{code: 1002, detail: "Conta inativa"})
+    end
+  end
+
+  def create_debit(conn, %{"financial_moviment" => financial_moviment_params}) do
+    financial_moviment = to_struct(%FinancialMoviment{}, financial_moviment_params)
+
+    if Bank.Account.is_account_active(financial_moviment.account_register_id) do
+      case Financial.create_debit(financial_moviment) do
+        {:ok, %FinancialMoviment{} = financial_moviment} ->
+          conn
+          |> put_status(:created)
+          |> render("show.json", financial_moviment: financial_moviment)
+
+        {:error, %{code: 1021}} ->
+          conn
+          |> put_status(:unprocessable_entity)
+          |> render("error.json", error: %{code: 1001, detail: "Saldo insuficiente"})
+      end
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render("error.json", error: %{code: 1002, detail: "Conta inativa"})
     end
   end
 

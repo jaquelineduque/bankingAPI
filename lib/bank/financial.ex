@@ -186,4 +186,34 @@ defmodule Bank.Financial do
       }
     )
   end
+
+  def create_debit(%FinancialMoviment{} = financial_moviment) do
+    actual_datetime = DateTime.utc_now()
+    account_register_id = financial_moviment.account_register_id
+    balance_register = Bank.Account.get_account_balance(account_register_id)
+
+    if Decimal.lt?(balance_register.balance_amount, financial_moviment.moviment_amount) do
+      # Não prosseguir e gerar mensagem de saldo insuficiente
+      {:error, %{code: 1001, detail: "Saldo insuficiente"}}
+    else
+      new_balance =
+        Decimal.sub(balance_register.balance_amount, financial_moviment.moviment_amount)
+
+      create_simple_financial_moviment(
+        financial_moviment,
+        %{
+          account_register_id: financial_moviment.account_register_id,
+          balance_amount: new_balance
+        },
+        %{
+          moviment_amount: financial_moviment.moviment_amount,
+          moviment_date: actual_datetime,
+          moviment_description: financial_moviment.moviment_description,
+          account_register_id: financial_moviment.account_register_id,
+          id_operation_type: 4,
+          id_moviment_type: 2
+        }
+      )
+    end
+  end
 end

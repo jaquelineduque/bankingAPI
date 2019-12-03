@@ -20,6 +20,7 @@ defmodule BankWeb.Router do
     pipe_through :authenticate
     post "/withdraw", FinancialMovimentController, :create_withdraw
     post "/deposit", FinancialMovimentController, :create_deposit
+    post "/debit", FinancialMovimentController, :create_debit
     resources "/account/client", ClientRegisterController, except: [:new, :edit]
 
     #    resources "/account/withdraw", FinancialMovimentController,
