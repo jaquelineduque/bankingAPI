@@ -10,6 +10,13 @@ defmodule Bank.Financial do
 
   alias Bank.Financial.FinancialMoviment, as: FinancialMoviment
 
+  @moviment_credit 1
+  @moviment_debit 2
+  @operation_withdraw 1
+  @operation_deposit 2
+  @operation_transfer 3
+  @operation_debit 4
+
   @doc """
   Returns the list of financial_moviment.
 
@@ -107,8 +114,8 @@ defmodule Bank.Financial do
   def create_simple_financial_moviment(
         %FinancialMoviment{} = financial_moviment,
         new_balance,
-        operation_type,
-        moviment_type
+        moviment_type,
+        operation_type
       ) do
     actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
@@ -129,8 +136,8 @@ defmodule Bank.Financial do
         moviment_date: actual_datetime,
         moviment_description: financial_moviment.moviment_description,
         account_register_id: financial_moviment.account_register_id,
-        id_operation_type: operation_type,
-        id_moviment_type: moviment_type
+        id_moviment_type: moviment_type,
+        id_operation_type: operation_type
       })
     )
     |> Repo.transaction()
@@ -157,8 +164,8 @@ defmodule Bank.Financial do
       create_simple_financial_moviment(
         financial_moviment,
         new_balance,
-        1,
-        2
+        @moviment_debit,
+        @operation_withdraw
       )
     end
   end
@@ -173,8 +180,8 @@ defmodule Bank.Financial do
     create_simple_financial_moviment(
       financial_moviment,
       new_balance,
-      2,
-      1
+      @moviment_credit,
+      @operation_deposit
     )
   end
 
@@ -192,8 +199,8 @@ defmodule Bank.Financial do
       create_simple_financial_moviment(
         financial_moviment,
         new_balance,
-        4,
-        2
+        @moviment_debit,
+        @operation_debit
       )
     end
   end
