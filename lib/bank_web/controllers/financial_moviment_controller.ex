@@ -47,7 +47,7 @@ defmodule BankWeb.FinancialMovimentController do
   end
 
   def create_withdraw(conn, %{"financial_moviment" => financial_moviment_params}) do
-    financial_moviment = to_struct(%FinancialMoviment{}, financial_moviment_params)
+    financial_moviment = Bank.Helper.to_struct(%FinancialMoviment{}, financial_moviment_params)
 
     if Bank.Account.is_account_active(financial_moviment.account_register_id) do
       case Financial.create_withdraw(financial_moviment) do
@@ -69,7 +69,7 @@ defmodule BankWeb.FinancialMovimentController do
   end
 
   def create_deposit(conn, %{"financial_moviment" => financial_moviment_params}) do
-    financial_moviment = to_struct(%FinancialMoviment{}, financial_moviment_params)
+    financial_moviment = Bank.Helper.to_struct(%FinancialMoviment{}, financial_moviment_params)
 
     if Bank.Account.is_account_active(financial_moviment.account_register_id) do
       case Financial.create_deposit(financial_moviment) do
@@ -86,7 +86,7 @@ defmodule BankWeb.FinancialMovimentController do
   end
 
   def create_debit(conn, %{"financial_moviment" => financial_moviment_params}) do
-    financial_moviment = to_struct(%FinancialMoviment{}, financial_moviment_params)
+    financial_moviment = Bank.Helper.to_struct(%FinancialMoviment{}, financial_moviment_params)
 
     if Bank.Account.is_account_active(financial_moviment.account_register_id) do
       case Financial.create_debit(financial_moviment) do
@@ -105,16 +105,5 @@ defmodule BankWeb.FinancialMovimentController do
       |> put_status(:unprocessable_entity)
       |> render("error.json", error: %{code: 1002, detail: "Conta inativa"})
     end
-  end
-
-  def to_struct(kind, attrs) do
-    struct = struct(kind)
-
-    Enum.reduce(Map.to_list(struct), struct, fn {k, _}, acc ->
-      case Map.fetch(attrs, Atom.to_string(k)) do
-        {:ok, v} -> %{acc | k => v}
-        :error -> acc
-      end
-    end)
   end
 end
