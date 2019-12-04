@@ -204,4 +204,178 @@ defmodule Bank.Financial do
       )
     end
   end
+
+  alias Bank.Financial.TransferMoviment
+
+  @doc """
+  Returns the list of transfer_moviment.
+
+  ## Examples
+
+      iex> list_transfer_moviment()
+      [%TransferMoviment{}, ...]
+
+  """
+  def list_transfer_moviment do
+    Repo.all(TransferMoviment)
+  end
+
+  @doc """
+  Gets a single transfer_moviment.
+
+  Raises `Ecto.NoResultsError` if the Transfer moviment does not exist.
+
+  ## Examples
+
+      iex> get_transfer_moviment!(123)
+      %TransferMoviment{}
+
+      iex> get_transfer_moviment!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_transfer_moviment!(id), do: Repo.get!(TransferMoviment, id)
+
+  @doc """
+  Creates a transfer_moviment.
+
+  ## Examples
+
+      iex> create_transfer_moviment(%{field: value})
+      {:ok, %TransferMoviment{}}
+
+      iex> create_transfer_moviment(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_transfer_moviment(attrs \\ %{}) do
+    %TransferMoviment{}
+    |> TransferMoviment.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a transfer_moviment.
+
+  ## Examples
+
+      iex> update_transfer_moviment(transfer_moviment, %{field: new_value})
+      {:ok, %TransferMoviment{}}
+
+      iex> update_transfer_moviment(transfer_moviment, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_transfer_moviment(%TransferMoviment{} = transfer_moviment, attrs) do
+    transfer_moviment
+    |> TransferMoviment.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a TransferMoviment.
+
+  ## Examples
+
+      iex> delete_transfer_moviment(transfer_moviment)
+      {:ok, %TransferMoviment{}}
+
+      iex> delete_transfer_moviment(transfer_moviment)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_transfer_moviment(%TransferMoviment{} = transfer_moviment) do
+    Repo.delete(transfer_moviment)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking transfer_moviment changes.
+
+  ## Examples
+
+      iex> change_transfer_moviment(transfer_moviment)
+      %Ecto.Changeset{source: %TransferMoviment{}}
+
+  """
+  def change_transfer_moviment(%TransferMoviment{} = transfer_moviment) do
+    TransferMoviment.changeset(transfer_moviment, %{})
+  end
+
+  def create_transfer(%TransferMoviment{} = transfer_moviment) do
+    account_register_id_origin = transfer_moviment.account_register_id_origin
+
+    balance_register_origin =
+      Bank.Account.get_account_balance(transfer_moviment.account_register_id_origin)
+
+    balance_register_destiny =
+      Bank.Account.get_account_balance(transfer_moviment.account_register_id_destiny)
+
+    if Decimal.lt?(balance_register_origin.balance_amount, transfer_moviment.moviment_amount) do
+      # Não prosseguir e gerar mensagem de saldo insuficiente
+      {:error, %{code: 1001, detail: "Saldo insuficiente"}}
+    else
+      new_balance_origin =
+        Decimal.sub(balance_register_origin.balance_amount, transfer_moviment.moviment_amount)
+
+      new_balance_destiny =
+        Decimal.add(balance_register_destiny.balance_amount, transfer_moviment.moviment_amount)
+
+      actual_datetime = DateTime.utc_now()
+      financial_moviment = %FinancialMoviment{}
+
+      Ecto.Multi.new()
+      |> Ecto.Multi.update(
+        :balance_register_origin,
+        AccountBalance.changeset(balance_register_origin, %{
+          account_register_id: transfer_moviment.account_register_id_origin,
+          balance_amount: new_balance_origin
+        })
+      )
+      |> Ecto.Multi.update(
+        :balance_register_destiny,
+        AccountBalance.changeset(balance_register_destiny, %{
+          account_register_id: transfer_moviment.account_register_id_destiny,
+          balance_amount: new_balance_destiny
+        })
+      )
+      |> Ecto.Multi.insert(
+        :financial_moviment_origin,
+        FinancialMoviment.changeset(financial_moviment, %{
+          moviment_amount: transfer_moviment.moviment_amount,
+          moviment_date: actual_datetime,
+          moviment_description: "Transferência enviada.",
+          account_register_id: transfer_moviment.account_register_id_origin,
+          id_moviment_type: @moviment_debit,
+          id_operation_type: @operation_transfer
+        })
+      )
+      |> Ecto.Multi.insert(
+        :financial_moviment_destiny,
+        FinancialMoviment.changeset(financial_moviment, %{
+          moviment_amount: transfer_moviment.moviment_amount,
+          moviment_date: actual_datetime,
+          moviment_description: "Transferência recebida.",
+          account_register_id: transfer_moviment.account_register_id_destiny,
+          id_moviment_type: @moviment_credit,
+          id_operation_type: @operation_transfer
+        })
+      )
+      |> Ecto.Multi.insert(
+        :transfer_moviment,
+        TransferMoviment.changeset(transfer_moviment, %{
+          moviment_amount: transfer_moviment.moviment_amount,
+          account_register_id_origin: transfer_moviment.account_register_id_origin,
+          account_register_id_destiny: transfer_moviment.account_register_id_destiny
+        })
+      )
+      |> Repo.transaction()
+      |> case do
+        {:ok, %{transfer_moviment: transfer_moviment}} ->
+          {:ok, transfer_moviment}
+
+        {:error, _, reason, _} ->
+          {:error, reason}
+      end
+    end
+  end
 end
