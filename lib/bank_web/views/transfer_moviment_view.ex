@@ -11,7 +11,12 @@ defmodule BankWeb.TransferMovimentView do
   end
 
   def render("transfer_moviment.json", %{transfer_moviment: transfer_moviment}) do
-    %{id: transfer_moviment.id,
-      moviment_amount: transfer_moviment.moviment_amount}
+    %{id: transfer_moviment.id, moviment_amount: transfer_moviment.moviment_amount}
+  end
+
+  def render("error.json", %{error: error}) do
+    %{
+      errors: error
+    }
   end
 end
