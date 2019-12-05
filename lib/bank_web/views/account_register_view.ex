@@ -19,4 +19,10 @@ defmodule BankWeb.AccountRegisterView do
       opening_date: account_register.opening_date
     }
   end
+
+  def render("error.json", %{error: error}) do
+    %{
+      errors: error
+    }
+  end
 end

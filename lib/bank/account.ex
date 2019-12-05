@@ -143,6 +143,17 @@ defmodule Bank.Account do
   """
   def get_account_register!(id), do: Repo.get!(AccountRegister, id)
 
+  alias Bank.Auth.User
+
+  def user_has_account_register(user_id) do
+    Repo.exists?(
+      from a in AccountRegister,
+        join: u in User,
+        on: a.user_id == u.id,
+        where: a.user_id == ^user_id
+    )
+  end
+
   @doc """
   Creates a account_register.
 

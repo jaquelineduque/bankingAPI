@@ -12,12 +12,25 @@ defmodule BankWeb.AccountRegisterController do
   end
 
   def create(conn, %{"account_register" => account_register_params}) do
-    with {:ok, %AccountRegister{} = account_register} <-
-           Account.create_account_register(account_register_params) do
+    account_reg = Bank.Helper.to_struct(%AccountRegister{}, account_register_params)
+
+    if Account.user_has_account_register(account_reg.user_id) do
       conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.account_register_path(conn, :show, account_register))
-      |> render("show.json", account_register: account_register)
+      |> put_status(:unprocessable_entity)
+      |> render("error.json",
+        error: %{code: 3001, detail: "Usuário já tem uma conta."}
+      )
+    else
+      with {:ok, %AccountRegister{} = account_register} <-
+             Account.create_account_register(account_register_params) do
+        conn
+        |> put_status(:created)
+        |> put_resp_header(
+          "location",
+          Routes.account_register_path(conn, :show, account_register)
+        )
+        |> render("show.json", account_register: account_register)
+      end
     end
   end
 
