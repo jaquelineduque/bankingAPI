@@ -120,6 +120,14 @@ defmodule Bank.Account do
   end
 
   @doc """
+  Checks if account exists.
+  """
+
+  def account_exists(id) do
+    Repo.exists?(from a in AccountRegister, where: a.id == ^id)
+  end
+
+  @doc """
   Gets a single account_register.
 
   Raises `Ecto.NoResultsError` if the Account register does not exist.
@@ -230,6 +238,19 @@ defmodule Bank.Account do
 
   """
   def get_account_balance!(id), do: Repo.get!(AccountBalance, id)
+
+  @doc """
+  Checks if balance exists.
+  """
+
+  def account_has_balance(id) do
+    Repo.exists?(
+      from a in AccountRegister,
+        join: b in AccountBalance,
+        on: a.id == b.account_register_id,
+        where: a.id == ^id
+    )
+  end
 
   @doc """
   Creates a account_balance.

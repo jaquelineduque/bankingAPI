@@ -21,9 +21,32 @@ defmodule BankWeb.AccountBalanceController do
     end
   end
 
+  def validate_account(account_register_id) do
+    cond do
+      !Account.account_exists(account_register_id) ->
+        {false, 2001, "Conta inexistente"}
+
+      !Account.account_has_balance(account_register_id) ->
+        {false, 2002, "Conta inativa"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
   def show(conn, %{"id" => id}) do
-    account_balance = Account.get_account_balance!(id)
-    render(conn, "show.json", account_balance: account_balance)
+    {validate, error_code, error_message} = validate_account(id)
+
+    if validate do
+      balance_register = Account.get_account_balance!(id)
+      render(conn, "show.json", account_balance: balance_register)
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render("error.json",
+        error: %{code: error_code, detail: error_message}
+      )
+    end
   end
 
   def update(conn, %{"id" => id, "account_balance" => account_balance_params}) do

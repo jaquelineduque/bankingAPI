@@ -11,7 +11,12 @@ defmodule BankWeb.AccountBalanceView do
   end
 
   def render("account_balance.json", %{account_balance: account_balance}) do
-    %{id: account_balance.id,
-      balance_amount: account_balance.balance_amount}
+    %{id: account_balance.id, balance_amount: account_balance.balance_amount}
+  end
+
+  def render("error.json", %{error: error}) do
+    %{
+      errors: error
+    }
   end
 end
