@@ -107,4 +107,15 @@ defmodule BankWeb.FinancialMovimentController do
       |> render("error.json", error: %{code: 1002, detail: "Conta inativa"})
     end
   end
+
+  def get_bank_statement(conn, %{
+        "account_register_id" => account_register_id,
+        "starting_date" => starting_date,
+        "ending_date" => ending_date
+      }) do
+    financial_moviment =
+      Financial.get_financial_moviment(account_register_id, starting_date, ending_date)
+
+    render(conn, "index.json", financial_moviment: financial_moviment)
+  end
 end

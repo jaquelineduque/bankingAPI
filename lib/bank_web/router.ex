@@ -23,6 +23,7 @@ defmodule BankWeb.Router do
     post "/debit", FinancialMovimentController, :create_debit
     post "/transfer", TransferMovimentController, :create_transfer
     get "/balance", AccountBalanceController, :show
+    get "/statement", FinancialMovimentController, :get_bank_statement
     resources "/account/client", ClientRegisterController, except: [:new, :edit]
 
     #    resources "/account/withdraw", FinancialMovimentController,

@@ -205,6 +205,28 @@ defmodule Bank.Financial do
     end
   end
 
+  @doc """
+  Returns the list of financial_moviment by account with a range date.
+
+  """
+  def get_financial_moviment(account_register_id, starting_date, ending_date) do
+    {:ok, converted_starting_date} =
+      NaiveDateTime.new(Date.from_iso8601!(starting_date), ~T[00:00:00])
+
+    {:ok, converted_ending_date} =
+      NaiveDateTime.new(Date.from_iso8601!(ending_date), ~T[23:59:59])
+
+    query =
+      from f in FinancialMoviment,
+        where:
+          f.account_register_id == ^account_register_id and
+            f.moviment_date >= ^converted_starting_date and
+            f.moviment_date <= ^converted_ending_date,
+        select: f
+
+    Repo.all(query)
+  end
+
   alias Bank.Financial.TransferMoviment
 
   @doc """
