@@ -24,4 +24,10 @@ defmodule BankWeb.UserView do
       }
     }
   end
+
+  def render("error.json", %{error: error}) do
+    %{
+      errors: error
+    }
+  end
 end

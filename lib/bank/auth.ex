@@ -37,6 +37,13 @@ defmodule Bank.Auth do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def is_email_already_taken(email) do
+    Repo.exists?(
+      from a in User,
+        where: a.email == ^email
+    )
+  end
+
   @doc """
   Creates a user.
 
