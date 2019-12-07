@@ -4,7 +4,7 @@ defmodule Bank.Auth.User do
 
   schema "users" do
     field :email, :string
-    field :is_active, :boolean, default: false
+    field :is_active, :boolean, default: true
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :auth_tokens, Bank.AuthToken
