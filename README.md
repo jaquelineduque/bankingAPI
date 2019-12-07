@@ -19,7 +19,7 @@ Passos para instalação descritos em "INSTALL.MD"[PENDENTE CRIAÇÃO].
 
 ### Sobre a autenticação  
 Com exceção da criação de usuário e login, por segurança, os demais métodos necessitam de autenticação. Para esta API está sendo utilizado o _**Bearer Token**_, portanto ele deverá ser enviado na autenticação das chamadas nas quais for obrigatório.  
-Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar estas autorizações consta em: https://learning.getpostman.com/docs/postman/sending-api-requests/authorization/ .
+Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar estas autorizações consta na página do [Postman](https://learning.getpostman.com/docs/postman/sending-api-requests/authorization/).
 
 ### Métodos
 
@@ -27,6 +27,9 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/user/login
  - GET /api/user
  - GET /api/user/:id
+ - POST /api/client
+ - GET /api/client
+ - GET /api/client/:id
  
 
 ### POST /api/user
@@ -172,7 +175,9 @@ Onde,
 Método destinado à consulta de usuário através do id de cadastro.  
 
 >URL: http://localhost:4000/api/user/:id  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+Onde,  
+"localhost:4000" é o endereço onde seu WS estiver exposto.  
+":id" é o id do usuário que está sendo consultado
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**
 Response em caso de sucesso:
@@ -193,6 +198,161 @@ Onde,
 - **is_active**: Indicador se o usuário está ativo ou inativo. Formato: booleano (true/false).
 
 Response em caso de erro:
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### POST /api/client
+Método destinado ao cadastro do cliente.  
+
+>URL: http://localhost:4000/api/client  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.**  
+Request:
+```
+{
+    "client_register": {
+        "user_id": 9999,
+        "name":"xxxxxx",
+        "cpf": "99999999999",
+        "date_of_birth": "AAAA-MM-DD"
+    }
+}
+```
+
+Onde,  
+- **client_register**: Estrutura para os dados do cliente.
+- **user_id**: Id do usuário que está sendo cadastrado. Este dado é obtido após a criação de usuário (onde são definidos email e senha).
+- **name**: Nome do cliente. Formato: texto. Obrigatório.
+- **cpf**: CPF do cliente. Formato: texto. Obrigatório. Observaçao: enviar sem pontuação.
+- **date_of_birth**: Data de nascimento do cliente. Formato: data (AAAA-MM-DD).
+
+Response em caso de sucesso:
+```
+{
+    "client_register": {
+        "cpf": "99999999999",
+        "date_of_birth": "AAAA-MM-DD",
+        "id": 9999,
+        "name": "xxxxxx",
+        "user_id": 9999
+    }
+}
+```
+
+Onde,  
+- **client_register**: Estrutura para os dados do cliente.
+- **cpf**: CPF do cliente. Formato: texto. Obrigatório. Observaçao: enviar sem pontuação.
+- **date_of_birth**: Data de nascimento do cliente. Formato: data (AAAA-MM-DD).
+- **id**: Id do registro de cadastro.
+- **name**: Nome do cliente. Formato: texto. Obrigatório.
+- **user_id**: Id do usuário atrelado ao cadastro.
+
+Response em caso de erro:
+
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### GET /api/client
+Método destinado à consulta de cliente.  
+
+>URL: http://localhost:4000/api/client  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.**  
+
+Response em caso de sucesso:
+```
+{
+    "client_registers": [
+        {
+            "cpf": "99999999999",
+            "date_of_birth": "AAAA-MM-DD",
+            "id": 9999,
+            "name": "xxxxxx",
+            "user_id": 99999
+        }
+    ]
+}
+```
+
+Onde,  
+- **client_registers**: Estrutura para os dados dos clientes.
+- **cpf**: CPF do cliente. Formato: texto. Obrigatório. Observaçao: enviar sem pontuação.
+- **date_of_birth**: Data de nascimento do cliente. Formato: data (AAAA-MM-DD).
+- **id**: Id do registro de cadastro.
+- **name**: Nome do cliente. Formato: texto. Obrigatório.
+- **user_id**: Id do usuário atrelado ao cadastro.
+
+Response em caso de erro:
+
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### GET /api/client/:id
+Método destinado à consulta de cliente.  
+
+>URL: http://localhost:4000/api/client/:id  
+Onde,  
+"localhost:4000" é o endereço onde seu WS estiver exposto.  
+":id" é o id do cadastro a ser consultado.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.**  
+
+Response em caso de sucesso:
+```
+{
+    "client_register": 
+        {
+            "cpf": "99999999999",
+            "date_of_birth": "AAAA-MM-DD",
+            "id": 9999,
+            "name": "xxxxxx",
+            "user_id": 99999
+        }
+}
+```
+
+Onde,  
+- **client_register**: Estrutura para os dados do cliente.
+- **cpf**: CPF do cliente. Formato: texto. Obrigatório. Observaçao: enviar sem pontuação.
+- **date_of_birth**: Data de nascimento do cliente. Formato: data (AAAA-MM-DD).
+- **id**: Id do registro de cadastro.
+- **name**: Nome do cliente. Formato: texto. Obrigatório.
+- **user_id**: Id do usuário atrelado ao cadastro.
+
+Response em caso de erro:
+
 ```
 {
     "errors": {
