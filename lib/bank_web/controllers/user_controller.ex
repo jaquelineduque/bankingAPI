@@ -61,7 +61,7 @@ defmodule BankWeb.UserController do
         conn
         |> put_status(:unauthorized)
         |> put_view(BankWeb.ErrorView)
-        |> render("401.json", message: message)
+        |> render("error.json", error: %{code: 3000, message: message})
     end
   end
 

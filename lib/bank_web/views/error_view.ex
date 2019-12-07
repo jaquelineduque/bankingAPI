@@ -17,4 +17,10 @@ defmodule BankWeb.ErrorView do
   def render("401.json", %{message: message}) do
     %{errors: %{detail: message}}
   end
+
+  def render("error.json", %{error: error}) do
+    %{
+      errors: error
+    }
+  end
 end
