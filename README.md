@@ -30,6 +30,9 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/client
  - GET /api/client
  - GET /api/client/:id
+ - POST /api/account
+ - GET /api/account
+ - GET /api/account/:id
  
 
 ### POST /api/user
@@ -320,7 +323,7 @@ Onde,
 - **detail**: Mensagem detalhada do erro.
 
 ### GET /api/client/:id
-Método destinado à consulta de cliente.  
+Método destinado à consulta de cliente através do id.  
 
 >URL: http://localhost:4000/api/client/:id  
 Onde,  
@@ -365,3 +368,146 @@ Onde,
 - **errors**: Estrutura de erro retornado.
 - **code**: Código interno do erro.
 - **detail**: Mensagem detalhada do erro.
+ 
+
+### POST /api/account
+Método destinado à criação de contas.  
+
+>URL: http://localhost:4000/api/account  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.**  
+Request:
+```
+{
+    "account_register": {
+        "user_id": 9
+    }
+}
+```
+Onde,  
+- **account_register**: Estrutura para os dados de conta.
+- **user_id**: Id do usuário para o qual a conta está sendo criada. Formato: numérico. Obrigatório.
+
+Response em caso de sucesso:
+```
+{
+    "account": {
+        "account_number": "99999999",
+        "active": false,
+        "agency_number": "9999",
+        "id": 9999,
+        "opening_date": AAAA-MM-DD
+    }
+}
+```
+Onde,  
+- **account**: Estrutura para os dados de conta.
+- **account_number**: Número da conta. Formato: texto.
+- **active**: Informa se a conta está ativa ou inativa. Formato: booleano (true/false). A conta precisa ser ativada por um método apartado.
+- **agency_number**: Número da agência. Formato: texto.
+- **id**: Id da conta. Formato: numérico.
+- **opening_date**: Data de abertura da conta, contada a partir da sua ativação. Formato: data (AAAA-MM-DDD).
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### GET /api/account
+Método destinado à consulta de contas.  
+
+>URL: http://localhost:4000/api/account  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Response em caso de sucesso:
+```
+{
+    "accounts": [
+        {
+            "account_number": "99999999",
+            "active": false,
+            "agency_number": "9999",
+            "id": 9999,
+            "opening_date": "AAAA-MM-DD"
+        }
+    ]
+}
+```
+Onde,  
+- **account**: Estrutura para os dados de conta.
+- **account_number**: Número da conta. Formato: texto.
+- **active**: Informa se a conta está ativa ou inativa. Formato: booleano (true/false). A conta precisa ser ativada por um método apartado.
+- **agency_number**: Número da agência. Formato: texto.
+- **id**: Id da conta. Formato: numérico.
+- **opening_date**: Data de abertura da conta, contada a partir da sua ativação. Formato: data (AAAA-MM-DDD).
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### GET /api/account/:id
+Método destinado à consulta de conta através do id.  
+
+>URL: http://localhost:4000/api/account  
+Onde,  
+"localhost:4000" é o endereço onde seu WS estiver exposto.  
+":id" é o id da conta à ser consultada.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Response em caso de sucesso:
+```
+{
+    "accounts": {
+        "account_number": "99999999",
+        "active": false,
+        "agency_number": "9999",
+        "id": 9999,
+        "opening_date": "AAAA-MM-DD"
+    }
+}
+```
+Onde,  
+- **account**: Estrutura para os dados de conta.
+- **account_number**: Número da conta. Formato: texto.
+- **active**: Informa se a conta está ativa ou inativa. Formato: booleano (true/false). A conta precisa ser ativada por um método apartado.
+- **agency_number**: Número da agência. Formato: texto.
+- **id**: Id da conta. Formato: numérico.
+- **opening_date**: Data de abertura da conta, contada a partir da sua ativação. Formato: data (AAAA-MM-DDD).
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro. 
+
