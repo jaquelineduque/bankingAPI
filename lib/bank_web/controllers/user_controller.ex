@@ -15,7 +15,7 @@ defmodule BankWeb.UserController do
     !!value && value != ""
   end
 
-  def validate_user(user) do
+  def is_user_email_and_password_filled(user) do
     cond do
       !is_string_filled(user.email) && !is_string_filled(user.password) ->
         {false, 3010, "E-mail e senha não informados"}
@@ -25,6 +25,18 @@ defmodule BankWeb.UserController do
 
       !is_string_filled(user.password) ->
         {false, 3012, "Senha não informada"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
+  def validate_user(user) do
+    {email_password_filled, error_code, error_message} = is_user_email_and_password_filled(user)
+
+    cond do
+      !email_password_filled ->
+        {email_password_filled, error_code, error_message}
 
       Auth.is_email_already_taken(user.email) ->
         {false, 3013, "E-mail já cadastrado"}
