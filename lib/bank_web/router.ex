@@ -25,18 +25,7 @@ defmodule BankWeb.Router do
     get "/balance", AccountBalanceController, :show
     get "/statement", FinancialMovimentController, :get_bank_statement
     resources "/account/client", ClientRegisterController, except: [:new, :edit]
-
-    #    resources "/account/withdraw", FinancialMovimentController,
-    #      except: [:new, :edit, :update, :delete]
-
     resources "/account", AccountRegisterController, except: [:new, :edit]
     post "/account/activate", AccountRegisterController, :activate
-    # get "/account/withdraw", FinancialMovimentController, :show
-    # post "/account/withdraw", FinancialMovimentController, :create
-  end
-
-  scope "/restricted", BankWeb do
-    pipe_through :authenticate
-    get "/private", UserController, :valor_fixo
   end
 end
