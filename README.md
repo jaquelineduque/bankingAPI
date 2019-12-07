@@ -25,7 +25,7 @@ Passos para instalação descritos em "INSTALL.MD"[PENDENTE CRIAÇÃO].
 ### GET /api/user
 Método destinado à consulta de usuários.  
 
->URL: http://localhost:4000/api/use
+>URL: http://localhost:4000/api/user  
 Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
 
 Response em caso de sucesso:
@@ -63,7 +63,7 @@ Onde,
 ### GET /api/user/:id
 Método destinado à consulta de usuário através do id de cadastro.  
 
->URL: http://localhost:4000/api/user/:id
+>URL: http://localhost:4000/api/user/:id  
 Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
 
 Response em caso de sucesso:
@@ -100,7 +100,7 @@ Onde,
 ### POST /api/user
 Método destinado ao cadastro de usuários.  
 
->URL: http://localhost:4000/api/use
+>URL: http://localhost:4000/api/user  
 Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
 
 Request:
