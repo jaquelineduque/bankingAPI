@@ -14,7 +14,7 @@ defmodule BankWeb.UserView do
     %{id: user.id, email: user.email, is_active: user.is_active}
   end
 
-  def render("sign_in.json", %{user: user}) do
+  def render("login.json", %{user: user}) do
     %{
       users: %{
         user: %{

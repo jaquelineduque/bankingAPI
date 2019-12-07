@@ -13,7 +13,7 @@ defmodule BankWeb.Router do
   scope "/api", BankWeb do
     pipe_through :api
     resources "/user", UserController, except: [:new, :edit]
-    post "/user/sign_in", UserController, :sign_in
+    post "/user/login", UserController, :login
   end
 
   scope "/api", BankWeb do

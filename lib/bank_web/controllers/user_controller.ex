@@ -15,15 +15,15 @@ defmodule BankWeb.UserController do
     !!value && value != ""
   end
 
-  def is_user_email_and_password_filled(user) do
+  def is_user_email_and_password_filled(email, password) do
     cond do
-      !is_string_filled(user.email) && !is_string_filled(user.password) ->
+      !is_string_filled(email) && !is_string_filled(password) ->
         {false, 3010, "E-mail e senha não informados"}
 
-      !is_string_filled(user.email) ->
+      !is_string_filled(email) ->
         {false, 3011, "E-mail não informado"}
 
-      !is_string_filled(user.password) ->
+      !is_string_filled(password) ->
         {false, 3012, "Senha não informada"}
 
       true ->
@@ -32,7 +32,8 @@ defmodule BankWeb.UserController do
   end
 
   def validate_user(user) do
-    {email_password_filled, error_code, error_message} = is_user_email_and_password_filled(user)
+    {email_password_filled, error_code, error_message} =
+      is_user_email_and_password_filled(user.email, user.password)
 
     cond do
       !email_password_filled ->
@@ -86,19 +87,31 @@ defmodule BankWeb.UserController do
     end
   end
 
-  def sign_in(conn, %{"email" => email, "password" => password}) do
-    case Bank.Auth.authenticate_user(email, password) do
-      {:ok, user} ->
-        conn
-        |> put_status(:ok)
-        |> put_view(BankWeb.UserView)
-        |> render("sign_in.json", user: user)
+  def login(conn, %{"user" => user_params}) do
+    user_struct = Bank.Helper.to_struct(%User{}, user_params)
 
-      {:error, message} ->
-        conn
-        |> put_status(:unauthorized)
-        |> put_view(BankWeb.ErrorView)
-        |> render("error.json", error: %{code: 3000, message: message})
+    {email_password_filled, error_code, error_message} =
+      is_user_email_and_password_filled(user_struct.email, user_struct.password)
+
+    if email_password_filled do
+      case Bank.Auth.authenticate_user(user_struct.email, user_struct.password) do
+        {:ok, user} ->
+          conn
+          |> put_status(:ok)
+          |> put_view(BankWeb.UserView)
+          |> render("login.json", user: user)
+
+        {:error, message} ->
+          conn
+          |> put_status(:unauthorized)
+          |> put_view(BankWeb.ErrorView)
+          |> render("error.json", error: %{code: 3000, message: message})
+      end
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> put_view(BankWeb.ErrorView)
+      |> render("error.json", error: %{code: error_code, message: error_message})
     end
   end
 
