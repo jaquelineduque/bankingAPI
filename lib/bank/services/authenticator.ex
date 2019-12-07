@@ -5,7 +5,8 @@ defmodule Bank.Services.Authenticator do
   # :crypto.strong_rand_bytes(30) 
   # |> Base.url_encode64 
   # |> binary_part(0, 30)
-  @secret "CHANGE_ME_k7kTxvFAgeBvAVA0OR1vkPbTi8mZ5m"
+  @secret "d9kHv6zAdk7kTxvFAgeBvAVA0OR1vkPbTi8mZ5m"
+
   def generate_token(id) do
     Phoenix.Token.sign(@secret, @seed, id, max_age: 86400)
   end

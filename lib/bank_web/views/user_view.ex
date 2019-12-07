@@ -16,11 +16,9 @@ defmodule BankWeb.UserView do
 
   def render("login.json", %{user: user}) do
     %{
-      users: %{
-        user: %{
-          id: user.id,
-          token: user.token
-        }
+      user: %{
+        id: user.id,
+        token: user.token
       }
     }
   end
