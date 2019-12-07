@@ -7,7 +7,7 @@ A API bancária destina-se à disponibilizar métodos que simulam os métodos b�
   - Criação e consulta de contas
   - Movimentações financeira como saque, depósito, transferência e débito.
   - Consulta de saldo
-  - Consulta de extrato
+  - Consulta de extrato  
 
 ### Tecnologias utilizadas 
  - Linguagem Exilir
@@ -17,87 +17,17 @@ A API bancária destina-se à disponibilizar métodos que simulam os métodos b�
 ### Instalação
 Passos para instalação descritos em "INSTALL.MD"[PENDENTE CRIAÇÃO].
 
+### Sobre a autenticação  
+Com exceção da criação de usuário e login, por segurança, os demais métodos necessitam de autenticação. Para esta API está sendo utilizado o _**Bearer Token**_, portanto ele deverá ser enviado na autenticação das chamadas nas quais for obrigatório.  
+Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar estas autorizações consta em: https://learning.getpostman.com/docs/postman/sending-api-requests/authorization/ .
+
 ### Métodos
 
- - GET /api/user
- - GET /api/user/:id
  - POST /api/user
  - POST /api/user/login
+ - GET /api/user
+ - GET /api/user/:id
  
-### GET /api/user
-Método destinado à consulta de usuários.  
-
->URL: http://localhost:4000/api/user  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
-
-Response em caso de sucesso:
-```
-{
-    "users": [
-        {
-            "email": "xxxxxx",
-            "id": 999,
-            "is_active": false
-        }
-    ]
-}
-```
-Onde, 
-- **users**: Conjunto de usuários retornados na pesquisa.  
-- **email**: E-mail cadastrado para o usuário. Formato: texto.  
-- **id**: Id de cadastro do usuário. Formato: numérico.  
-- **is_active**: Indicador se o usuário está ativo ou inativo. Formato: booleano (true/false).  
-
-Response em caso de erro:
-```
-{
-    "errors": {
-        "code": 9999,
-        "detail": "xxxxxx"
-    }
-}
-```
-Onde,   
-- **errors**: Estrutura de erro retornado.
-- **code**: Código interno do erro.
-- **detail**: Mensagem detalhada do erro.
-
-### GET /api/user/:id
-Método destinado à consulta de usuário através do id de cadastro.  
-
->URL: http://localhost:4000/api/user/:id  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
-
-Response em caso de sucesso:
-```
-{
-    "user": 
-        {
-            "email": "xxxxx",
-            "id": 999,
-            "is_active": false
-        }
-}
-```
-Onde, 
-- **user**: Conjunto de informações do usuário retornado.  
-- **email**: E-mail cadastrado para o usuário. Formato: texto.
-- **id**: Id de cadastro do usuário. Formato: numérico.
-- **is_active**: Indicador se o usuário está ativo ou inativo. Formato: booleano (true/false).
-
-Response em caso de erro:
-```
-{
-    "errors": {
-        "code": 9999,
-        "detail": "xxxxxx"
-    }
-}
-```
-Onde,   
-- **errors**: Estrutura de erro retornado.
-- **code**: Código interno do erro.
-- **detail**: Mensagem detalhada do erro.
 
 ### POST /api/user
 Método destinado ao cadastro de usuários.  
@@ -184,6 +114,83 @@ Onde,
 - **user**: Estrutura com dados do usuário.
 - **id**: Id do usuário.
 - **token**: Token de acesso para as demais operações.
+
+Response em caso de erro:
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### GET /api/user
+Método destinado à consulta de usuários.  
+
+>URL: http://localhost:4000/api/user  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.**  
+Response em caso de sucesso:
+```
+{
+    "users": [
+        {
+            "email": "xxxxxx",
+            "id": 999,
+            "is_active": false
+        }
+    ]
+}
+```
+Onde, 
+- **users**: Conjunto de usuários retornados na pesquisa.  
+- **email**: E-mail cadastrado para o usuário. Formato: texto.  
+- **id**: Id de cadastro do usuário. Formato: numérico.  
+- **is_active**: Indicador se o usuário está ativo ou inativo. Formato: booleano (true/false).  
+
+Response em caso de erro:
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### GET /api/user/:id
+Método destinado à consulta de usuário através do id de cadastro.  
+
+>URL: http://localhost:4000/api/user/:id  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.**
+Response em caso de sucesso:
+```
+{
+    "user": 
+        {
+            "email": "xxxxx",
+            "id": 999,
+            "is_active": false
+        }
+}
+```
+Onde, 
+- **user**: Conjunto de informações do usuário retornado.  
+- **email**: E-mail cadastrado para o usuário. Formato: texto.
+- **id**: Id de cadastro do usuário. Formato: numérico.
+- **is_active**: Indicador se o usuário está ativo ou inativo. Formato: booleano (true/false).
 
 Response em caso de erro:
 ```
