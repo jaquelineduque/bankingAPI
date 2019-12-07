@@ -11,11 +11,11 @@ defmodule BankWeb.ErrorView do
   # the template name. For example, "404.json" becomes
   # "Not Found".
   def template_not_found(template, _assigns) do
-    %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
+    %{errors: %{code: 9999, detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
   def render("401.json", %{message: message}) do
-    %{errors: %{detail: message}}
+    %{errors: %{code: 9999, detail: message}}
   end
 
   def render("error.json", %{error: error}) do

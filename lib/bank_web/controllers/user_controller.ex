@@ -11,20 +11,45 @@ defmodule BankWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
+  def is_string_filled(value) do
+    !!value && value != ""
+  end
+
+  def validate_user(user) do
+    cond do
+      !is_string_filled(user.email) && !is_string_filled(user.password) ->
+        {false, 3010, "E-mail e senha não informados"}
+
+      !is_string_filled(user.email) ->
+        {false, 3011, "E-mail não informado"}
+
+      !is_string_filled(user.password) ->
+        {false, 3012, "Senha não informada"}
+
+      Auth.is_email_already_taken(user.email) ->
+        {false, 3013, "E-mail já cadastrado"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
   def create(conn, %{"user" => user_params}) do
     user_struct = Bank.Helper.to_struct(%User{}, user_params)
 
-    if Auth.is_email_already_taken(user_struct.email) do
-      conn
-      |> put_status(:unprocessable_entity)
-      |> render("error.json", error: %{code: 3001, detail: "E-mail já cadastrado"})
-    else
+    {user_valid, error_code, error_message} = validate_user(user_struct)
+
+    if user_valid do
       with {:ok, %User{} = user} <- Auth.create_user(user_params) do
         conn
         |> put_status(:created)
         |> put_resp_header("location", Routes.user_path(conn, :show, user))
         |> render("show.json", user: user)
       end
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render("error.json", error: %{code: error_code, detail: error_message})
     end
   end
 

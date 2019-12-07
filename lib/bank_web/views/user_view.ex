@@ -3,11 +3,11 @@ defmodule BankWeb.UserView do
   alias BankWeb.UserView
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, UserView, "user.json")}
+    %{users: render_many(users, UserView, "user.json")}
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
+    %{user: render_one(user, UserView, "user.json")}
   end
 
   def render("user.json", %{user: user}) do
@@ -16,7 +16,7 @@ defmodule BankWeb.UserView do
 
   def render("sign_in.json", %{user: user}) do
     %{
-      data: %{
+      users: %{
         user: %{
           id: user.id,
           token: user.token
