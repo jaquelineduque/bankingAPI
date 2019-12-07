@@ -3,11 +3,11 @@ defmodule BankWeb.AccountRegisterView do
   alias BankWeb.AccountRegisterView
 
   def render("index.json", %{account_register: account_register}) do
-    %{data: render_many(account_register, AccountRegisterView, "account_register.json")}
+    %{accounts: render_many(account_register, AccountRegisterView, "account_register.json")}
   end
 
   def render("show.json", %{account_register: account_register}) do
-    %{data: render_one(account_register, AccountRegisterView, "account_register.json")}
+    %{account: render_one(account_register, AccountRegisterView, "account_register.json")}
   end
 
   def render("account_register.json", %{account_register: account_register}) do

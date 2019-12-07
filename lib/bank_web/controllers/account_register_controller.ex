@@ -11,16 +11,28 @@ defmodule BankWeb.AccountRegisterController do
     render(conn, "index.json", account_register: account_register)
   end
 
+  def validate_user(user_id) do
+    cond do
+      !(!!user_id) ->
+        {false, 3001, "Usuário não informado"}
+
+      Account.user_has_account_register(user_id) ->
+        {false, 3002, "Usuário já tem uma conta"}
+
+      !Bank.Auth.user_exists(user_id) ->
+        {false, 3003, "Usuário não localizado"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
   def create(conn, %{"account_register" => account_register_params}) do
     account_reg = Bank.Helper.to_struct(%AccountRegister{}, account_register_params)
 
-    if Account.user_has_account_register(account_reg.user_id) do
-      conn
-      |> put_status(:unprocessable_entity)
-      |> render("error.json",
-        error: %{code: 3001, detail: "Usuário já tem uma conta."}
-      )
-    else
+    {valid_user, error_code, error_message} = validate_user(account_reg.user_id)
+
+    if valid_user do
       with {:ok, %AccountRegister{} = account_register} <-
              Account.create_account_register(account_register_params) do
         conn
@@ -31,6 +43,10 @@ defmodule BankWeb.AccountRegisterController do
         )
         |> render("show.json", account_register: account_register)
       end
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render("error.json", error: %{code: error_code, detail: error_message})
     end
   end
 
