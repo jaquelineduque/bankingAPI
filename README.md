@@ -12,6 +12,7 @@ A API bancária destina-se à disponibilizar métodos que simulam os métodos b�
 ### Tecnologias utilizadas 
  - Linguagem Exilir
  - Framework Phoenix
+ - PostgreSQL
 
 ### Instalação
 Passos para instalação descritos em "INSTALL.MD"[PENDENTE CRIAÇÃO].
@@ -21,6 +22,7 @@ Passos para instalação descritos em "INSTALL.MD"[PENDENTE CRIAÇÃO].
  - GET /api/user
  - GET /api/user/:id
  - POST /api/user
+ - POST /api/user/login
  
 ### GET /api/user
 Método destinado à consulta de usuários.  
@@ -132,6 +134,57 @@ Onde,
 - **id**: Id de cadastro do usuário. Formato: numérico.  
 - **is_active**: Indicador se o usuário está ativo ou inativo. Formato: booleano (true/false).  
  
+Response em caso de erro:
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro.
+
+### POST /api/user/login
+Método destinado ao login de usuários. Se houver sucesso, retorna um token que deverá ser utilizado nas demais operações.  
+
+>URL: http://localhost:4000/api/user/login  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+Request:
+
+```
+{
+    "user": {
+        "email": "xxxxxx",
+        "password": "xxxxxx"
+    }
+}
+```
+
+Onde,  
+- **email**: E-mail de cadastro do usuário.
+- **senha**: Senha de cadastro do usuário.
+
+
+Response em caso do sucesso:
+```
+{
+    "user": {
+        "id": 9999,
+        "token": "xxxxxx"
+    }
+}
+```
+
+Onde,  
+- **user**: Estrutura com dados do usuário.
+- **id**: Id do usuário.
+- **token**: Token de acesso para as demais operações.
+
 Response em caso de erro:
 ```
 {
