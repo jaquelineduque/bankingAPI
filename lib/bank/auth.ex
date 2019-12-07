@@ -117,7 +117,7 @@ defmodule Bank.Auth do
   # Verifying with empty
   defp verify_password(nil, _) do
     Bcrypt.no_user_verify()
-    {:error, "Wrong email or password"}
+    {:error, "E-mail ou senha inválida"}
   end
 
   alias Bank.Services.Authenticator
@@ -131,7 +131,7 @@ defmodule Bank.Auth do
     else
       # token = Authenticator.generate_token(user)
       # Repo.insert(Ecto.build_assoc(user, :auth_tokens, %{token: token}))
-      {:error, "Wrong email or password"}
+      {:error, "E-mail ou senha inválida"}
     end
   end
 
