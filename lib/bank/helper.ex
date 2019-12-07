@@ -9,4 +9,8 @@ defmodule Bank.Helper do
       end
     end)
   end
+
+  def is_string_filled(value) do
+    !!value && value != ""
+  end
 end

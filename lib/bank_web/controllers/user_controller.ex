@@ -11,19 +11,15 @@ defmodule BankWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
-  def is_string_filled(value) do
-    !!value && value != ""
-  end
-
   def is_user_email_and_password_filled(email, password) do
     cond do
-      !is_string_filled(email) && !is_string_filled(password) ->
+      !Bank.Helper.is_string_filled(email) && !Bank.Helper.is_string_filled(password) ->
         {false, 3010, "E-mail e senha não informados"}
 
-      !is_string_filled(email) ->
+      !Bank.Helper.is_string_filled(email) ->
         {false, 3011, "E-mail não informado"}
 
-      !is_string_filled(password) ->
+      !Bank.Helper.is_string_filled(password) ->
         {false, 3012, "Senha não informada"}
 
       true ->

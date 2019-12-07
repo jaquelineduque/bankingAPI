@@ -145,6 +145,10 @@ defmodule Bank.Account do
 
   alias Bank.Auth.User
 
+  @doc """
+  Checks if user already has an account register.
+  Returns true or false
+  """
   def user_has_account_register(user_id) do
     Repo.exists?(
       from a in AccountRegister,
@@ -282,6 +286,28 @@ defmodule Bank.Account do
   end
 
   @doc """
+  Check if user already has a client register
+  Returns true or false
+  """
+  def user_has_client_register(user_id) do
+    Repo.exists?(
+      from u in ClientRegister,
+        where: u.user_id == ^user_id
+    )
+  end
+
+  @doc """
+  Check if cpf has already be registered
+  Returns true or false
+  """
+  def cpf_already_taken(cpf) do
+    Repo.exists?(
+      from u in ClientRegister,
+        where: u.cpf == ^cpf
+    )
+  end
+
+  @doc """
   Updates a account_balance.
 
   ## Examples
@@ -328,6 +354,9 @@ defmodule Bank.Account do
     AccountBalance.changeset(account_balance, %{})
   end
 
+  @doc """
+  Activates account
+  """
   def activate_account_register(%AccountRegister{} = account_register) do
     actual_date = Date.utc_today()
 
@@ -361,9 +390,17 @@ defmodule Bank.Account do
     end
   end
 
+  @doc """
+  Gets account balance
+  """
   def get_account_balance(account_register_id) do
     Repo.get_by!(AccountBalance, account_register_id: account_register_id)
   end
+
+  @doc """
+  Check if account is active
+  Returns true or false
+  """
 
   def is_account_active(id) do
     account_register = get_account_register!(id)

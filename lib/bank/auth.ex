@@ -45,6 +45,17 @@ defmodule Bank.Auth do
   end
 
   @doc """
+  Check if user exists by id.
+  Returns true or false
+  """
+  def user_exists(id) do
+    Repo.exists?(
+      from a in User,
+        where: a.id == ^id
+    )
+  end
+
+  @doc """
   Creates a user.
 
   ## Examples
