@@ -119,7 +119,7 @@ defmodule Bank.Financial do
       ) do
     actual_datetime = DateTime.utc_now()
     account_register_id = financial_moviment.account_register_id
-    balance_register = Bank.Account.get_account_balance(account_register_id)
+    balance_register = Bank.Account.get_balance_by_account_number(account_register_id)
 
     Ecto.Multi.new()
     |> Ecto.Multi.update(
@@ -152,7 +152,7 @@ defmodule Bank.Financial do
 
   def create_withdraw(%FinancialMoviment{} = financial_moviment) do
     account_register_id = financial_moviment.account_register_id
-    balance_register = Bank.Account.get_account_balance(account_register_id)
+    balance_register = Bank.Account.get_balance_by_account_number(account_register_id)
 
     if Decimal.lt?(
          Decimal.cast(balance_register.balance_amount),
@@ -179,7 +179,7 @@ defmodule Bank.Financial do
   def create_deposit(%FinancialMoviment{} = financial_moviment) do
     account_register_id = financial_moviment.account_register_id
 
-    balance_register = Bank.Account.get_account_balance(account_register_id)
+    balance_register = Bank.Account.get_balance_by_account_number(account_register_id)
 
     new_balance =
       Decimal.add(
@@ -197,7 +197,7 @@ defmodule Bank.Financial do
 
   def create_debit(%FinancialMoviment{} = financial_moviment) do
     account_register_id = financial_moviment.account_register_id
-    balance_register = Bank.Account.get_account_balance(account_register_id)
+    balance_register = Bank.Account.get_balance_by_account_number(account_register_id)
 
     if Decimal.lt?(
          Decimal.cast(balance_register.balance_amount),
@@ -340,13 +340,11 @@ defmodule Bank.Financial do
   end
 
   def create_transfer(%TransferMoviment{} = transfer_moviment) do
-    account_register_id_origin = transfer_moviment.account_register_id_origin
-
     balance_register_origin =
-      Bank.Account.get_account_balance(transfer_moviment.account_register_id_origin)
+      Bank.Account.get_balance_by_account_number(transfer_moviment.account_register_id_origin)
 
     balance_register_destiny =
-      Bank.Account.get_account_balance(transfer_moviment.account_register_id_destiny)
+      Bank.Account.get_balance_by_account_number(transfer_moviment.account_register_id_destiny)
 
     if Decimal.lt?(
          Decimal.cast(balance_register_origin.balance_amount),

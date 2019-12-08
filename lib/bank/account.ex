@@ -391,9 +391,9 @@ defmodule Bank.Account do
   end
 
   @doc """
-  Gets account balance
+  Gets balance by account number
   """
-  def get_account_balance(account_register_id) do
+  def get_balance_by_account_number(account_register_id) do
     Repo.get_by!(AccountBalance, account_register_id: account_register_id)
   end
 
