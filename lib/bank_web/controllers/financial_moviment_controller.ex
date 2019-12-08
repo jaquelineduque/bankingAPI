@@ -47,6 +47,19 @@ defmodule BankWeb.FinancialMovimentController do
     end
   end
 
+  def validate_financial_moviment(financial_moviment) do
+    cond do
+      !Bank.Account.account_exists(financial_moviment.account_register_id) ->
+        {false, 1051, "Conta não localizada"}
+
+      !Bank.Account.is_account_active(financial_moviment.account_register_id) ->
+        {false, 1052, "Conta não foi ativada"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
   def create_withdraw(conn, %{"financial_moviment" => financial_moviment_params}) do
     financial_moviment = Bank.Helper.to_struct(%FinancialMoviment{}, financial_moviment_params)
 
