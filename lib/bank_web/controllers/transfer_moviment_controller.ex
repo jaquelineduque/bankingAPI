@@ -3,7 +3,6 @@ defmodule BankWeb.TransferMovimentController do
 
   alias Bank.Financial
   alias Bank.Financial.TransferMoviment
-  alias Bank.Account
 
   action_fallback BankWeb.FallbackController
 
@@ -71,24 +70,51 @@ defmodule BankWeb.TransferMovimentController do
     end
   end
 
+  def validate_account_transfer(transfer_moviment) do
+    cond do
+      !(!!transfer_moviment.account_register_id_origin) ->
+        {false, 7001, "Conta de origem não informada"}
+
+      !(!!transfer_moviment.account_register_id_destiny) ->
+        {false, 7002, "Conta de destino não informada"}
+
+      transfer_moviment.account_register_id_origin ==
+          transfer_moviment.account_register_id_destiny ->
+        {false, 7003, "Conta de origem igual à de destino"}
+
+      !(!!transfer_moviment.moviment_amount) ->
+        {false, 7004, "Valor da movimentação não informado"}
+
+      !Bank.Account.account_exists(transfer_moviment.account_register_id_origin) ->
+        {false, 7005, "Conta de origem não localizada"}
+
+      !Bank.Account.is_account_active(transfer_moviment.account_register_id_origin) ->
+        {false, 7006, "Conta de origem inativa"}
+
+      !Bank.Account.account_exists(transfer_moviment.account_register_id_destiny) ->
+        {false, 7007, "Conta de destino não localizada"}
+
+      !Bank.Account.is_account_active(transfer_moviment.account_register_id_destiny) ->
+        {false, 7008, "Conta de destino inativa"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
   def create_transfer(conn, %{"transfer_moviment" => transfer_moviment_params}) do
     transfer_moviment = Bank.Helper.to_struct(%TransferMoviment{}, transfer_moviment_params)
 
-    # if Bank.Account.is_account_active(transfer_moviment.account_register_id_origin) do
-    {active, error_code, error_message} =
-      validate_account_transfer(
-        transfer_moviment.account_register_id_origin,
-        transfer_moviment.account_register_id_destiny
-      )
+    {valid_transfer, error_code, error_message} = validate_account_transfer(transfer_moviment)
 
-    if active do
+    if valid_transfer do
       case Financial.create_transfer(transfer_moviment) do
         {:ok, %TransferMoviment{} = transfer_moviment} ->
           conn
           |> put_status(:created)
           |> render("show.json", transfer_moviment: transfer_moviment)
 
-        {:error, %{code: 1021}} ->
+        {:error, %{code: 1001}} ->
           conn
           |> put_status(:unprocessable_entity)
           |> render("error.json", error: %{code: 1001, detail: "Saldo insuficiente"})
