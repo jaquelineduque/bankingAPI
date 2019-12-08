@@ -72,12 +72,34 @@ defmodule BankWeb.AccountRegisterController do
     end
   end
 
-  def activate(conn, %{"account_id" => account_id}) do
-    account_register = Account.get_account_register!(account_id)
+  def validate_account_activation(account_id) do
+    cond do
+      !Account.account_exists(account_id) ->
+        {false, 3021, "Conta não localizada"}
 
-    with {:ok, %AccountRegister{} = account_register} <-
-           Account.activate_account_register(account_register) do
-      render(conn, "show.json", account_register: account_register)
+      Account.is_account_active(account_id) ->
+        {false, 3022, "Conta já ativada"}
+
+      true ->
+        {true, 0, ""}
+    end
+  end
+
+  def activate(conn, %{"account_id" => account_id}) do
+    {valid_account_activation, error_code, error_message} =
+      validate_account_activation(account_id)
+
+    if valid_account_activation do
+      account_register = Account.get_account_register!(account_id)
+
+      with {:ok, %AccountRegister{} = account_register} <-
+             Account.activate_account_register(account_register) do
+        render(conn, "show.json", account_register: account_register)
+      end
+    else
+      conn
+      |> put_status(:unprocessable_entity)
+      |> render("error.json", error: %{code: error_code, detail: error_message})
     end
   end
 end
