@@ -5,7 +5,7 @@ A API bancária destina-se à disponibilizar métodos que simulam os métodos b�
   - Login
   - Cadastro e de clientes
   - Criação e consulta de contas
-  - Movimentações financeira como saque, depósito, transferência e débito.
+  - Movimentações financeiras como saque, depósito, transferência e débito.
   - Consulta de saldo
   - Consulta de extrato  
 
@@ -36,6 +36,7 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/account/activate/:id
  - POST /api/financial/withdraw
  - POST /api/financial/deposit
+ - POST /api/financial/debit
  
 
 ### POST /api/user
@@ -678,3 +679,59 @@ Onde,
 - **code**: Código interno do erro.
 - **detail**: Mensagem detalhada do erro. 
 
+### POST /api/financial/debit
+Método destinado ao débito em conta.  
+
+>URL: http://localhost:4000/api/financial/debit  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Request:
+```
+{
+    "financial_moviment": {
+        "account_register_id": 9999,
+        "moviment_amount": 99.99,
+        "moviment_description": "xxxxxx"
+    }
+}
+```
+
+Onde,  
+- **financial_moviment**: Estrutura com os dados da movimentação.
+- **account_register_id**: Id  da conta. Formato: numérico. Obrigatório.
+- **moviment_amount**: Valor da movimentação. Formato: numérico decimal. Separador decimal: "." (Exemplo: 99.99). Obrigatório.
+- **moviment_description**: Descrição da movimentação. Formato: texto.
+
+Response em caso de sucesso:
+
+```
+{
+    "financial_moviment": {
+        "id": 9999,
+        "moviment_amount": "99.99",
+        "moviment_date": "AAAA-MM-DDTHH:MM:SS.ZZZZZZZ",
+        "moviment_description": "Saque em agência"
+    }
+}
+```
+Onde,  
+- **id**: Id da movimentação. Formato: numérico.
+- **moviment_amount**: Valor da movimentação. Formato: texto.
+- **moviment_date**: Data e hora da movimentação. Formato: data e hora (AAAA-MM-DDTHH:MM:SS.ZZZZZZZ). **As datas/hora são em UTC (Coordinated Universal Time)**.
+- **moviment_description**: Descrição do movimento. Formato: texto.
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro. 
