@@ -23,6 +23,9 @@ defmodule BankWeb.AccountBalanceController do
 
   def validate_account(account_register_id) do
     cond do
+      !(!!account_register_id) ->
+        {false, 2003, "Id da conta não informado"}
+
       !Account.account_exists(account_register_id) ->
         {false, 2001, "Conta inexistente"}
 
@@ -34,11 +37,11 @@ defmodule BankWeb.AccountBalanceController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"account_register_id" => id}) do
     {validate, error_code, error_message} = validate_account(id)
 
     if validate do
-      balance_register = Account.get_account_balance!(id)
+      balance_register = Account.get_balance_by_account_number(id)
       render(conn, "show.json", account_balance: balance_register)
     else
       conn
