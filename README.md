@@ -832,7 +832,7 @@ Onde,
 ### GET /api/financial/statement
 Método destinado à consulta de extrato.  
 
->URL: http://localhost:4000/api/financial/balance?account_register_id=9999&starting_date=AAAA-MM-DD&ending_date=AAAA-MM-DD  
+>URL: http://localhost:4000/api/financial/statement?account_register_id=9999&starting_date=AAAA-MM-DD&ending_date=AAAA-MM-DD  
 Onde,  
 "localhost:4000" é o endereço onde seu WS estiver exposto.  
 "account_register_id" é o id da conta
