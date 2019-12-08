@@ -181,7 +181,11 @@ defmodule Bank.Financial do
 
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
-    new_balance = Decimal.add(balance_register.balance_amount, financial_moviment.moviment_amount)
+    new_balance =
+      Decimal.add(
+        Decimal.cast(balance_register.balance_amount),
+        Decimal.cast(financial_moviment.moviment_amount)
+      )
 
     create_simple_financial_moviment(
       financial_moviment,
