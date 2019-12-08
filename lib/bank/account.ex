@@ -124,7 +124,7 @@ defmodule Bank.Account do
   """
 
   def account_exists(id) do
-    Repo.exists?(from a in AccountRegister, where: a.id == ^id)
+    Repo.exists?(from a in AccountRegister, where: a.id == ^id, select: a.id)
   end
 
   @doc """
