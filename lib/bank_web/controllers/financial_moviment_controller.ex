@@ -49,6 +49,12 @@ defmodule BankWeb.FinancialMovimentController do
 
   def validate_financial_moviment(financial_moviment) do
     cond do
+      !(!!financial_moviment.account_register_id) ->
+        {false, 1060, "Id da conta não informado"}
+
+      !(!!financial_moviment.moviment_amount) ->
+        {false, 1061, "Valor da movimentação não informada"}
+
       !Bank.Account.account_exists(financial_moviment.account_register_id) ->
         {false, 1051, "Conta não localizada"}
 

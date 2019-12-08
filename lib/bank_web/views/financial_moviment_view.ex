@@ -4,7 +4,7 @@ defmodule BankWeb.FinancialMovimentView do
 
   def render("index.json", %{financial_moviment: financial_moviment}) do
     %{
-      financial_moviment:
+      financial_moviments:
         render_many(financial_moviment, FinancialMovimentView, "financial_moviment.json")
     }
   end
