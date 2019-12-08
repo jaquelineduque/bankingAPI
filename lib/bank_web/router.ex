@@ -21,13 +21,13 @@ defmodule BankWeb.Router do
     get "/user", UserController, :index
     get "/user/:id", UserController, :show
     resources "/client", ClientRegisterController, except: [:new, :edit]
-    post "/withdraw", FinancialMovimentController, :create_withdraw
-    post "/deposit", FinancialMovimentController, :create_deposit
-    post "/debit", FinancialMovimentController, :create_debit
-    post "/transfer", TransferMovimentController, :create_transfer
-    get "/balance", AccountBalanceController, :show
-    get "/statement", FinancialMovimentController, :get_bank_statement
     resources "/account", AccountRegisterController, except: [:new, :edit]
     post "/account/activate", AccountRegisterController, :activate
+    post "/financial/withdraw", FinancialMovimentController, :create_withdraw
+    post "/financial/deposit", FinancialMovimentController, :create_deposit
+    post "/financial/debit", FinancialMovimentController, :create_debit
+    post "/financial/transfer", TransferMovimentController, :create_transfer
+    get "/financial/balance", AccountBalanceController, :show
+    get "/financial/statement", FinancialMovimentController, :get_bank_statement
   end
 end
