@@ -39,6 +39,7 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/financial/debit
  - POST /api/financial/transfer
  - GET /api/financial/balance
+ - GET /api/financial/statement
  
 
 ### POST /api/user
@@ -791,7 +792,7 @@ Onde,
 - **detail**: Mensagem detalhada do erro. 
 
 ### GET /api/financial/balance
-Método destinado às consulta de saldo.  
+Método destinado à consulta de saldo.  
 
 >URL: http://localhost:4000/api/financial/balance?account_register_id=999  
 Onde,  
@@ -828,4 +829,49 @@ Onde,
 - **code**: Código interno do erro.
 - **detail**: Mensagem detalhada do erro. 
 
+### GET /api/financial/statement
+Método destinado à consulta de extrato.  
+
+>URL: http://localhost:4000/api/financial/balance?account_register_id=9999&starting_date=AAAA-MM-DD&ending_date=AAAA-MM-DD  
+Onde,  
+"localhost:4000" é o endereço onde seu WS estiver exposto.  
+"account_register_id" é o id da conta
+"starting_date" é a data de início da busca. Formato: data (AAAA-MM-DD)
+"ending_date" é a data de fim da busca. Formato: data (AAAA-MM-DD)
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Response em caso de sucesso:
+```
+{
+    "financial_moviments": [
+        {
+            "id": 9999,
+            "moviment_amount": "99.99",
+            "moviment_date": "AAAA-MM-DDTHH:MM:SS.ZZZZZZZ",
+            "moviment_description": "xxxxxx"
+        }
+    ]
+}
+```
+Onde,  
+- **financial_moviments**: Estrutura com as movimentações dentro da datas consultadas.
+- **id**: Id da movimentação.
+- **moviment_amount**: Valor da movimentação. Formato: numérico decimal. Separador decimal: "." (99.99).
+- **moviment_date**: ata e hora da movimentação. Formato: data e hora (AAAA-MM-DDTHH:MM:SS.ZZZZZZZ). **As datas/hora são em UTC (Coordinated Universal Time)**.
+- **moviment_description**: Descrição da movimentação. Formato: texto.
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro. 
 
