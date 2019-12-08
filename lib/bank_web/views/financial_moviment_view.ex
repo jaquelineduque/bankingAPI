@@ -3,11 +3,17 @@ defmodule BankWeb.FinancialMovimentView do
   alias BankWeb.FinancialMovimentView
 
   def render("index.json", %{financial_moviment: financial_moviment}) do
-    %{data: render_many(financial_moviment, FinancialMovimentView, "financial_moviment.json")}
+    %{
+      financial_moviment:
+        render_many(financial_moviment, FinancialMovimentView, "financial_moviment.json")
+    }
   end
 
   def render("show.json", %{financial_moviment: financial_moviment}) do
-    %{data: render_one(financial_moviment, FinancialMovimentView, "financial_moviment.json")}
+    %{
+      financial_moviment:
+        render_one(financial_moviment, FinancialMovimentView, "financial_moviment.json")
+    }
   end
 
   def render("financial_moviment.json", %{financial_moviment: financial_moviment}) do
