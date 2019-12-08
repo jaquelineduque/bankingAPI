@@ -199,12 +199,18 @@ defmodule Bank.Financial do
     account_register_id = financial_moviment.account_register_id
     balance_register = Bank.Account.get_account_balance(account_register_id)
 
-    if Decimal.lt?(balance_register.balance_amount, financial_moviment.moviment_amount) do
+    if Decimal.lt?(
+         Decimal.cast(balance_register.balance_amount),
+         Decimal.cast(financial_moviment.moviment_amount)
+       ) do
       # Não prosseguir e gerar mensagem de saldo insuficiente
       {:error, %{code: 1001, detail: "Saldo insuficiente"}}
     else
       new_balance =
-        Decimal.sub(balance_register.balance_amount, financial_moviment.moviment_amount)
+        Decimal.sub(
+          Decimal.cast(balance_register.balance_amount),
+          Decimal.cast(financial_moviment.moviment_amount)
+        )
 
       create_simple_financial_moviment(
         financial_moviment,
