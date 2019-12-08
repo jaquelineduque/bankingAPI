@@ -37,6 +37,7 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/financial/withdraw
  - POST /api/financial/deposit
  - POST /api/financial/debit
+ - POST /api/financial/transfer
  
 
 ### POST /api/user
@@ -735,3 +736,56 @@ Onde,
 - **errors**: Estrutura de erro retornado.
 - **code**: Código interno do erro.
 - **detail**: Mensagem detalhada do erro. 
+
+### POST /api/financial/transfer
+Método destinado às transferências entre contas.  
+
+>URL: http://localhost:4000/api/financial/transfer  
+Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Request:
+```
+{
+    "transfer_moviment":{
+        "account_register_id_origin": 9999,
+        "account_register_id_destiny": 9999,
+        "moviment_amount": 99.99
+    }
+}
+```
+
+Onde,  
+- **account_register_id_origin**: Id da conta de origem (da qual o valor será debitado). Formato: numérico. Obrigatório.
+- **account_register_id_destiny**: Id da conta de destino (na qual o valor será creditado). Formato: numérico. Obrigatório
+- **moviment_amount**: Valor da movimentação. Formato: numérico decimal. Separador decimal: "." (99.99). Obrigatório.
+
+Response em caso de sucesso:
+```
+{
+    "transfer_moviment": {
+        "id": 9999,
+        "moviment_amount": "99.99"
+    }
+}
+```
+Onde,  
+- **transfer_moviment**: Estrutura para os dados de transferência.
+- **id**: Id da transferência. Formato: numérico.
+- **moviment_amount**: Valor da movimentação. Formato: numérico decimal. Separador decimal: "." (99.99).
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro. 
+
