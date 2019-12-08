@@ -53,7 +53,7 @@ defmodule BankWeb.FinancialMovimentController do
         {false, 1051, "Conta não localizada"}
 
       !Bank.Account.is_account_active(financial_moviment.account_register_id) ->
-        {false, 1052, "Conta não foi ativada"}
+        {false, 1052, "Conta inativa"}
 
       true ->
         {true, 0, ""}
