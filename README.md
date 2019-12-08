@@ -33,6 +33,7 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/account
  - GET /api/account
  - GET /api/account/:id
+ - POST /api/account/activate/:id
  
 
 ### POST /api/user
@@ -493,7 +494,13 @@ Onde,
 - **account**: Estrutura para os dados de conta.
 - **account_number**: Número da conta. Formato: texto.
 - **active**: Informa se a conta está ativa ou inativa. Formato: booleano (true/false). A conta precisa ser ativada por um método apartado.
+- **agency_number**: NúmOnde,  
+- **account**: Estrutura para os dados de conta.
+- **account_number**: Número da conta. Formato: texto.
+- **active**: Informa se a conta está ativa ou inativa. Formato: booleano (true/false). A conta precisa ser ativada por um método apartado.
 - **agency_number**: Número da agência. Formato: texto.
+- **id**: Id da conta. Formato: numérico.
+- **opening_date**: Data de abertura da conta, contada a partir da sua ativação. Formato: data (AAAA-MM-DDD).ero da agência. Formato: texto.
 - **id**: Id da conta. Formato: numérico.
 - **opening_date**: Data de abertura da conta, contada a partir da sua ativação. Formato: data (AAAA-MM-DDD).
 
@@ -511,3 +518,46 @@ Onde,
 - **code**: Código interno do erro.
 - **detail**: Mensagem detalhada do erro. 
 
+### POST /api/account/activate/:id
+Método destinado à ativação de conta através do id.  
+
+>URL: http://localhost:4000/api/account/activate/:id  
+Onde,  
+"localhost:4000" é o endereço onde seu WS estiver exposto.  
+":id" é o id da conta à ser consultada.
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Response em caso de sucesso:
+```
+{
+    "account": {
+        "account_number": "99999999",
+        "active": true,
+        "agency_number": "9999",
+        "id": 9999,
+        "opening_date": "AAAA-MM-DD"
+    }
+}
+```
+Onde,  
+- **account**: Estrutura para os dados de conta.
+- **account_number**: Número da conta. Formato: texto.
+- **active**: Informa se a conta está ativa ou inativa. Formato: booleano (true/false). Quando há sucesso na ativação, o dado virá como true.
+- **agency_number**: Número da agência. Formato: texto.
+- **id**: Id da conta. Formato: numérico.
+- **opening_date**: Data de abertura da conta, quando há sucesso neste processo de ativação é apresentada a data atual. Formato: data (AAAA-MM-DDD).
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro. 
