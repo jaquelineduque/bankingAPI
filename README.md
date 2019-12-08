@@ -38,6 +38,7 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
  - POST /api/financial/deposit
  - POST /api/financial/debit
  - POST /api/financial/transfer
+ - GET /api/financial/balance
  
 
 ### POST /api/user
@@ -788,4 +789,43 @@ Onde,
 - **errors**: Estrutura de erro retornado.
 - **code**: Código interno do erro.
 - **detail**: Mensagem detalhada do erro. 
+
+### GET /api/financial/balance
+Método destinado às consulta de saldo.  
+
+>URL: http://localhost:4000/api/financial/balance?account_register_id=999  
+Onde,  
+"localhost:4000" é o endereço onde seu WS estiver exposto.  
+"account_register_id" é o id da conta
+
+**O token enviando no login deverá ser utilizado na autorização desta requisição.** 
+
+Response em caso de sucesso:
+```
+{
+    "account_balance": {
+        "account_register_id": 9999,
+        "balance_amount": "99.99"
+    }
+}
+```
+Onde,
+- **account_balance**: Estrutura com os dados do saldo.
+- **account_register_id**: Id da conta. Formato: numérico.
+- **balance_amount**: Saldo em conta no momento da consulta. Formato: Formato: numérico decimal. Separador decimal: "." (99.99).
+
+Response em caso de erro:  
+```
+{
+    "errors": {
+        "code": 9999,
+        "detail": "xxxxxx"
+    }
+}
+```
+Onde,   
+- **errors**: Estrutura de erro retornado.
+- **code**: Código interno do erro.
+- **detail**: Mensagem detalhada do erro. 
+
 
