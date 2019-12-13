@@ -45,8 +45,8 @@ Caso esteja utilizando o Postman para seus testes,um tutorial de como enviar est
 ### POST /api/user
 Método destinado ao cadastro de usuários.  
 
->URL: http://localhost:4000/api/user  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/user  
+
 
 Request:
 ```
@@ -94,8 +94,8 @@ Onde,
 ### POST /api/user/login
 Método destinado ao login de usuários. Se houver sucesso, retorna um token que deverá ser utilizado nas demais operações.  
 
->URL: http://localhost:4000/api/user/login  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/user/login  
+
 
 Request:
 
@@ -145,8 +145,8 @@ Onde,
 ### GET /api/user
 Método destinado à consulta de usuários.  
 
->URL: http://localhost:4000/api/user  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/user  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**  
 Response em caso de sucesso:
@@ -184,9 +184,8 @@ Onde,
 ### GET /api/user/:id
 Método destinado à consulta de usuário através do id de cadastro.  
 
->URL: http://localhost:4000/api/user/:id  
+>URL: https://banking.gigalixirapp.com/api/user/:id  
 Onde,  
-"localhost:4000" é o endereço onde seu WS estiver exposto.  
 ":id" é o id do usuário que está sendo consultado
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**
@@ -224,8 +223,8 @@ Onde,
 ### POST /api/client
 Método destinado ao cadastro do cliente.  
 
->URL: http://localhost:4000/api/client  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/client  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**  
 Request:
@@ -286,8 +285,8 @@ Onde,
 ### GET /api/client
 Método destinado à consulta de cliente.  
 
->URL: http://localhost:4000/api/client  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/client  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**  
 
@@ -332,9 +331,8 @@ Onde,
 ### GET /api/client/:id
 Método destinado à consulta de cliente através do id.  
 
->URL: http://localhost:4000/api/client/:id  
+>URL: https://banking.gigalixirapp.com/api/client/:id  
 Onde,  
-"localhost:4000" é o endereço onde seu WS estiver exposto.  
 ":id" é o id do cadastro a ser consultado.
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**  
@@ -380,8 +378,8 @@ Onde,
 ### POST /api/account
 Método destinado à criação de contas.  
 
->URL: http://localhost:4000/api/account  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/account  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.**  
 Request:
@@ -433,8 +431,8 @@ Onde,
 ### GET /api/account
 Método destinado à consulta de contas.  
 
->URL: http://localhost:4000/api/account  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/account  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
 
@@ -477,9 +475,8 @@ Onde,
 ### GET /api/account/:id
 Método destinado à consulta de conta através do id.  
 
->URL: http://localhost:4000/api/account  
+>URL: https://banking.gigalixirapp.com/api/account  
 Onde,  
-"localhost:4000" é o endereço onde seu WS estiver exposto.  
 ":id" é o id da conta à ser consultada.
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
@@ -527,9 +524,8 @@ Onde,
 ### POST /api/account/activate/:id
 Método destinado à ativação de conta através do id.  
 
->URL: http://localhost:4000/api/account/activate/:id  
+>URL: https://banking.gigalixirapp.com/api/account/activate/:id  
 Onde,  
-"localhost:4000" é o endereço onde seu WS estiver exposto.  
 ":id" é o id da conta à ser consultada.
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
@@ -571,8 +567,8 @@ Onde,
 ### POST /api/financial/withdraw
 Método destinado ao saque em conta.  
 
->URL: http://localhost:4000/api/financial/withdraw  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/financial/withdraw  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
 
@@ -628,8 +624,8 @@ Onde,
 ### POST /api/financial/deposit
 Método destinado ao depósito em conta.  
 
->URL: http://localhost:4000/api/financial/deposit  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/financial/deposit  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
 
@@ -685,8 +681,8 @@ Onde,
 ### POST /api/financial/debit
 Método destinado ao débito em conta.  
 
->URL: http://localhost:4000/api/financial/debit  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/financial/debit  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
 
@@ -742,8 +738,8 @@ Onde,
 ### POST /api/financial/transfer
 Método destinado às transferências entre contas.  
 
->URL: http://localhost:4000/api/financial/transfer  
-Onde, "localhost:4000" é o endereço onde seu WS estiver exposto.
+>URL: https://banking.gigalixirapp.com/api/financial/transfer  
+
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
 
@@ -794,9 +790,8 @@ Onde,
 ### GET /api/financial/balance
 Método destinado à consulta de saldo.  
 
->URL: http://localhost:4000/api/financial/balance?account_register_id=999  
-Onde,  
-"localhost:4000" é o endereço onde seu WS estiver exposto.  
+>URL: https://banking.gigalixirapp.com/api/financial/balance?account_register_id=999  
+Onde,    
 "account_register_id" é o id da conta
 
 **O token enviando no login deverá ser utilizado na autorização desta requisição.** 
@@ -832,9 +827,8 @@ Onde,
 ### GET /api/financial/statement
 Método destinado à consulta de extrato.  
 
->URL: http://localhost:4000/api/financial/statement?account_register_id=9999&starting_date=AAAA-MM-DD&ending_date=AAAA-MM-DD  
+>URL: https://banking.gigalixirapp.com/api/financial/statement?account_register_id=9999&starting_date=AAAA-MM-DD&ending_date=AAAA-MM-DD  
 Onde,  
-"localhost:4000" é o endereço onde seu WS estiver exposto.  
 "account_register_id" é o id da conta
 "starting_date" é a data de início da busca. Formato: data (AAAA-MM-DD)
 "ending_date" é a data de fim da busca. Formato: data (AAAA-MM-DD)
