@@ -21,7 +21,9 @@ defmodule BankWeb.FinancialMovimentView do
       id: financial_moviment.id,
       moviment_amount: financial_moviment.moviment_amount,
       moviment_date: financial_moviment.moviment_date,
-      moviment_description: financial_moviment.moviment_description
+      moviment_description: financial_moviment.moviment_description,
+      id_operation_type: financial_moviment.id_operation_type,
+      id_moviment_type: financial_moviment.id_moviment_type
     }
   end
 
