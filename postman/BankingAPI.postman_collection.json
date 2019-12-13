@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "af5a9136-6565-4fc7-9a68-95bacacfb0b2",
-		"name": "BankingAPI",
+		"_postman_id": "60374a8e-4144-4df8-9533-f4d51e5dd549",
+		"name": "BankingAPI_Gigalixir",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -30,12 +30,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000"
+					"path": [
+						""
+					]
 				}
 			},
 			"response": []
@@ -72,12 +76,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/user",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/user",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"user"
@@ -85,6 +90,72 @@
 				}
 			},
 			"response": [
+				{
+					"name": "user_post_fail",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"password\": \"12345\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "57"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sat, 07 Dec 2019 14:32:20 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd4dTenF5IBRxdgAAAYC"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"code\": 3011,\n        \"detail\": \"E-mail não informado\"\n    }\n}"
+				},
 				{
 					"name": "user_post_success",
 					"originalRequest": {
@@ -154,72 +225,6 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"user\": {\n        \"email\": \"marceladuarte@test.com\",\n        \"id\": 11,\n        \"is_active\": false\n    }\n}"
-				},
-				{
-					"name": "user_post_fail",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user\": {\n        \"password\": \"12345\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"user"
-							]
-						}
-					},
-					"status": "Unprocessable Entity",
-					"code": 422,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "57"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sat, 07 Dec 2019 14:32:20 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd4dTenF5IBRxdgAAAYC"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"errors\": {\n        \"code\": 3011,\n        \"detail\": \"E-mail não informado\"\n    }\n}"
 				}
 			]
 		},
@@ -240,7 +245,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user\": {\n        \"email\": \"maria@test.com\",\n        \"password\": \"12345\"\n    }\n}",
+					"raw": "{\n    \"user\": {\n        \"email\": \"maria@teste.com\",\n        \"password\": \"12345\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -248,12 +253,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/user/login",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/user/login",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"user",
@@ -262,73 +268,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "login_post_success",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user\": {\n        \"email\": \"maria@test.com\",\n        \"password\": \"12345\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/user/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"user",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "1660"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sat, 07 Dec 2019 17:51:17 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd4oKUNK1IBI8acAAAKh"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"user\": {\n        \"id\": 19,\n        \"token\": \"SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgA2uXzhbgE.Cs5bXUSeFF-iSncNYNKXBDHiLn0ZOdQoYmIZlqMr3WE\"\n    }\n}"
-				},
 				{
 					"name": "login_post_fail",
 					"originalRequest": {
@@ -395,21 +334,99 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"errors\": {\n        \"code\": 3000,\n        \"message\": \"E-mail ou senha inválida\"\n    }\n}"
+				},
+				{
+					"name": "login_post_success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"email\": \"maria@test.com\",\n        \"password\": \"12345\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "1660"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sat, 07 Dec 2019 17:51:17 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd4oKUNK1IBI8acAAAKh"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 19,\n        \"token\": \"SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgA2uXzhbgE.Cs5bXUSeFF-iSncNYNKXBDHiLn0ZOdQoYmIZlqMr3WE\"\n    }\n}"
 				}
 			]
 		},
 		{
 			"name": "user_get",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/user/",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/user/",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"user",
@@ -431,7 +448,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/api/user/",
+							"raw": "http://localhost:4000/api/user/?",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -488,15 +505,26 @@
 		{
 			"name": "user_get/:id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/user/1",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/user/1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"user",
@@ -505,57 +533,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "user_get_by_id_fail",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/user/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"user",
-								"100"
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "45"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sat, 07 Dec 2019 14:39:16 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd4drtcCAMCGiuEAAAQj"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"errors\": {\n        \"code\": 9999,\n        \"detail\": \"Not Found\"\n    }\n}"
-				},
 				{
 					"name": "user_get_by_id_success",
 					"originalRequest": {
@@ -606,6 +583,57 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"user\": {\n        \"email\": \"alao@test.com\",\n        \"id\": 1,\n        \"is_active\": false\n    }\n}"
+				},
+				{
+					"name": "user_get_by_id_fail",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/user/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"user",
+								"100"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "45"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sat, 07 Dec 2019 14:39:16 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd4drtcCAMCGiuEAAAQj"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"code\": 9999,\n        \"detail\": \"Not Found\"\n    }\n}"
 				}
 			]
 		},
@@ -617,7 +645,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAAKZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAC2F1dGhfdG9rZW5zdAAAAARkAA9fX2NhcmRpbmFsaXR5X19kAARtYW55ZAAJX19maWVsZF9fZAALYXV0aF90b2tlbnNkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAAFZW1haWxtAAAADWFsYW9AdGVzdC5jb21kAAJpZGEBZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhF2QABGhvdXJhE2QAC21pY3Jvc2Vjb25kaAJiAAc7kGEGZAAGbWludXRlYTJkAAVtb250aGELZAAGc2Vjb25kYRhkAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkelBxR3dqMC5SQm5nbjBKZjIwOC5FZTB3SkN0b0VYSjJuZ0xBYklvMGJzWm1qVXB1ekQ3WnVkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YRdkAARob3VyYRNkAAttaWNyb3NlY29uZGgCYgAHO5BhBmQABm1pbnV0ZWEyZAAFbW9udGhhC2QABnNlY29uZGEYZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDT2NCZbgE.pGgYuIYPd7pNJYa6h6HQk1D2TlAEsGG9JGgAKzEAHJ8",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -633,7 +661,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"client_register\": {\r\n        \"user_id\": 1,\r\n        \"name\": \"Aloisio Brasilia\",\r\n        \"cpf\": \"03802253020\",\r\n        \"date_of_birth\": \"1987-10-10\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"client_register\": {\r\n        \"user_id\": 2,\r\n        \"name\": \"Mario Bandeira\",\r\n        \"cpf\": \"99623938098\",\r\n        \"date_of_birth\": \"1987-10-10\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -641,20 +669,86 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/account/client",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/client",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
-						"account",
 						"client"
 					]
 				}
 			},
 			"response": [
+				{
+					"name": "client_post_fail",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"client_register\": {\n        \"user_id\": 11,\n        \"name\":\"Aloisio Portugal\",\n        \"cpf\": \"24594083072\",\n        \"date_of_birth\": \"1987-10-10\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"client"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "60"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sat, 07 Dec 2019 19:42:34 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd4uPB5E58AQlCgAAALh"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"code\": 4005,\n        \"detail\": \"Id do usuário inválido\"\n    }\n}"
+				},
 				{
 					"name": "client_post_success",
 					"originalRequest": {
@@ -724,72 +818,6 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"client_register\": {\n        \"cpf\": \"49577224040\",\n        \"date_of_birth\": \"1987-10-10\",\n        \"id\": 11,\n        \"name\": \"Aloisio Portugal\",\n        \"user_id\": 12\n    }\n}"
-				},
-				{
-					"name": "client_post_fail",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"client_register\": {\n        \"user_id\": 11,\n        \"name\":\"Aloisio Portugal\",\n        \"cpf\": \"24594083072\",\n        \"date_of_birth\": \"1987-10-10\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/client",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"client"
-							]
-						}
-					},
-					"status": "Unprocessable Entity",
-					"code": 422,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "60"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sat, 07 Dec 2019 19:42:34 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd4uPB5E58AQlCgAAALh"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"errors\": {\n        \"code\": 4005,\n        \"detail\": \"Id do usuário inválido\"\n    }\n}"
 				}
 			]
 		},
@@ -804,7 +832,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDoKYnhbgE.Ok1mF0oE48Xh-qKTXaxdhMkdytfpn9bBkbShO2bBVNo",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -820,7 +848,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"client_register\": {\r\n        \"user_id\": 3,\r\n        \"name\": \"Maria Lima\",\r\n        \"cpf\": \"27205887097\",\r\n        \"date_of_birth\": \"1987-10-10\"\r\n    }\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -828,15 +856,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/account/client",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/client",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
-						"account",
 						"client"
 					]
 				}
@@ -854,15 +882,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"client_register\": {\r\n        \"user_id\": 3,\r\n        \"name\": \"Maria Lima\",\r\n        \"cpf\": \"27205887097\",\r\n        \"date_of_birth\": \"1987-10-10\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "http://localhost:4000/api/client",
 							"protocol": "http",
@@ -913,10 +932,31 @@
 		{
 			"name": "cliente_get/:id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "https://banking.gigalixirapp.com/api/client/1",
+					"protocol": "https",
+					"host": [
+						"banking",
+						"gigalixirapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"client",
+						"1"
+					]
 				}
 			},
 			"response": [
@@ -981,7 +1021,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAAKZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAC2F1dGhfdG9rZW5zdAAAAARkAA9fX2NhcmRpbmFsaXR5X19kAARtYW55ZAAJX19maWVsZF9fZAALYXV0aF90b2tlbnNkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAAFZW1haWxtAAAADWFsYW9AdGVzdC5jb21kAAJpZGEBZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhGGQABGhvdXJhEGQAC21pY3Jvc2Vjb25kaAJiAAs3GGEGZAAGbWludXRlYStkAAVtb250aGELZAAGc2Vjb25kYQ1kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYmxCTzZLU1EvMUlrY3lQYTc1ZndSLkVoTVZEZWIyZ1RScmkuYzBtUENnRzVoaERkb0hIUXlkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YRhkAARob3VyYRBkAAttaWNyb3NlY29uZGgCYgALNxhhBmQABm1pbnV0ZWErZAAFbW9udGhhC2QABnNlY29uZGENZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDN-EuebgE.Uq-UDbywTrtf6ixktdaHXFfu_hpEm2-kd2D4weUDVsM",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1005,12 +1045,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/account",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/account",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"account"
@@ -1018,6 +1059,72 @@
 				}
 			},
 			"response": [
+				{
+					"name": "post_account_fail",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_register\": {\n        \"user_id\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"account"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "62"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sat, 07 Dec 2019 21:51:56 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd41SyCKNMAldnQAAABC"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"code\": 3002,\n        \"detail\": \"Usuário já tem uma conta\"\n    }\n}"
+				},
 				{
 					"name": "post_account_success",
 					"originalRequest": {
@@ -1087,72 +1194,6 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"account\": {\n        \"account_number\": \"34886415\",\n        \"active\": false,\n        \"agency_number\": \"6131\",\n        \"id\": 10,\n        \"opening_date\": null\n    }\n}"
-				},
-				{
-					"name": "post_account_fail",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"account_register\": {\n        \"user_id\": 1\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/account",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"account"
-							]
-						}
-					},
-					"status": "Unprocessable Entity",
-					"code": 422,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "62"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sat, 07 Dec 2019 21:51:56 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd41SyCKNMAldnQAAABC"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"errors\": {\n        \"code\": 3002,\n        \"detail\": \"Usuário já tem uma conta\"\n    }\n}"
 				}
 			]
 		},
@@ -1164,7 +1205,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAAKZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAC2F1dGhfdG9rZW5zdAAAAARkAA9fX2NhcmRpbmFsaXR5X19kAARtYW55ZAAJX19maWVsZF9fZAALYXV0aF90b2tlbnNkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAAFZW1haWxtAAAADWFsYW9AdGVzdC5jb21kAAJpZGEBZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhGGQABGhvdXJhEGQAC21pY3Jvc2Vjb25kaAJiAAs3GGEGZAAGbWludXRlYStkAAVtb250aGELZAAGc2Vjb25kYQ1kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYmxCTzZLU1EvMUlrY3lQYTc1ZndSLkVoTVZEZWIyZ1RScmkuYzBtUENnRzVoaERkb0hIUXlkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YRhkAARob3VyYRBkAAttaWNyb3NlY29uZGgCYgALNxhhBmQABm1pbnV0ZWErZAAFbW9udGhhC2QABnNlY29uZGENZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDN-EuebgE.Uq-UDbywTrtf6ixktdaHXFfu_hpEm2-kd2D4weUDVsM",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1172,12 +1213,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/account",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/account",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"account"
@@ -1245,7 +1287,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDoKYnhbgE.Ok1mF0oE48Xh-qKTXaxdhMkdytfpn9bBkbShO2bBVNo",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1253,16 +1295,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/account/2",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/account/1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"account",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -1328,7 +1371,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDoKYnhbgE.Ok1mF0oE48Xh-qKTXaxdhMkdytfpn9bBkbShO2bBVNo",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1336,12 +1379,13 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/account/activate?account_id=4",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/account/activate?account_id=1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"account",
@@ -1350,7 +1394,7 @@
 					"query": [
 						{
 							"key": "account_id",
-							"value": "4"
+							"value": "1"
 						}
 					]
 				}
@@ -1480,7 +1524,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAANYWxhb0B0ZXN0LmNvbWQAAmlkYQFkAAtpbnNlcnRlZF9hdHQAAAANZAAKX19zdHJ1Y3RfX2QAD0VsaXhpci5EYXRlVGltZWQACGNhbGVuZGFyZAATRWxpeGlyLkNhbGVuZGFyLklTT2QAA2RheWEeZAAEaG91cmERZAALbWljcm9zZWNvbmRoAmIAA-gAYQZkAAZtaW51dGVhKGQABW1vbnRoYQtkAAZzZWNvbmRhHGQACnN0ZF9vZmZzZXRhAGQACXRpbWVfem9uZW0AAAAHRXRjL1VUQ2QACnV0Y19vZmZzZXRhAGQABHllYXJiAAAH42QACXpvbmVfYWJicm0AAAADVVRDZAAJaXNfYWN0aXZlZAAFZmFsc2VkAAhwYXNzd29yZGQAA25pbGQADXBhc3N3b3JkX2hhc2htAAAAPCQyYiQxMiRtc0ZLVG8vc2F5bmZFNjBZbElCWjV1MkQ4aE5Fa3pxS2U1dS5jdmhyeGh4bGJzNlVQLmxUU2QACnVwZGF0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhHmQABGhvdXJhEWQAC21pY3Jvc2Vjb25kaAJiAAPoAGEGZAAGbWludXRlYShkAAVtb250aGELZAAGc2Vjb25kYRxkAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QABnNpZ25lZG4GAA5oZr1uAQ.6Vgel1Zof6xHpLDlw3aTW0a9b20TpZIlpUt8r2310Qc",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1504,15 +1548,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/account/withdraw?",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/financial/withdraw",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
-						"account",
+						"financial",
 						"withdraw"
 					],
 					"query": [
@@ -1683,7 +1728,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgCGP8PmbgE.e-sHoi-9oVwP9FsHBaV2qAxL5zXnemQlwkC1vGfZLac",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1707,12 +1752,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/financial/deposit",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/financial/deposit",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"financial",
@@ -1721,73 +1767,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "deposit_post_fail",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"financial_moviment\": {\n        \"account_register_id\": 1000,\n        \"moviment_amount\": 200,\n        \"moviment_description\": \"Depósito em caixa eletrônico\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/financial/deposit",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"financial",
-								"deposit"
-							]
-						}
-					},
-					"status": "Unprocessable Entity",
-					"code": 422,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "57"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sun, 08 Dec 2019 19:36:32 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd58fDlHEUB-G-oAAAIh"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"errors\": {\n        \"code\": 1051,\n        \"detail\": \"Conta não localizada\"\n    }\n}"
-				},
 				{
 					"name": "deposit_post_success",
 					"originalRequest": {
@@ -1854,6 +1833,73 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"financial_moviment\": {\n        \"id\": 34,\n        \"moviment_amount\": \"200\",\n        \"moviment_date\": \"2019-12-08T19:37:01.503000Z\",\n        \"moviment_description\": \"Depósito em caixa eletrônico\"\n    }\n}"
+				},
+				{
+					"name": "deposit_post_fail",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"financial_moviment\": {\n        \"account_register_id\": 1000,\n        \"moviment_amount\": 200,\n        \"moviment_description\": \"Depósito em caixa eletrônico\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/financial/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"financial",
+								"deposit"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "57"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 08 Dec 2019 19:36:32 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd58fDlHEUB-G-oAAAIh"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"code\": 1051,\n        \"detail\": \"Conta não localizada\"\n    }\n}"
 				}
 			]
 		},
@@ -1865,7 +1911,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgCGP8PmbgE.e-sHoi-9oVwP9FsHBaV2qAxL5zXnemQlwkC1vGfZLac",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -1889,12 +1935,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/financial/debit",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/financial/debit",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"financial",
@@ -1903,73 +1950,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "debit_post_fail",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"financial_moviment\": {\n        \"account_register_id\": 1,\n        \"moviment_amount\": 20999.73,\n        \"moviment_description\": \"Compra em mercadinho Logo Ali.\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/financial/debit",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"financial",
-								"debit"
-							]
-						}
-					},
-					"status": "Unprocessable Entity",
-					"code": 422,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "54"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sun, 08 Dec 2019 19:57:07 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd59m-GvCYANfRUAAAAE"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"errors\": {\n        \"code\": 1001,\n        \"detail\": \"Saldo insuficiente\"\n    }\n}"
-				},
 				{
 					"name": "debit_post_success",
 					"originalRequest": {
@@ -2036,6 +2016,73 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"financial_moviment\": {\n        \"id\": 38,\n        \"moviment_amount\": \"10.73\",\n        \"moviment_date\": \"2019-12-08T19:58:57.252000Z\",\n        \"moviment_description\": \"Compra em mercadinho Logo Ali.\"\n    }\n}"
+				},
+				{
+					"name": "debit_post_fail",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"financial_moviment\": {\n        \"account_register_id\": 1,\n        \"moviment_amount\": 20999.73,\n        \"moviment_description\": \"Compra em mercadinho Logo Ali.\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/financial/debit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"financial",
+								"debit"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "54"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 08 Dec 2019 19:57:07 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd59m-GvCYANfRUAAAAE"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"code\": 1001,\n        \"detail\": \"Saldo insuficiente\"\n    }\n}"
 				}
 			]
 		},
@@ -2047,7 +2094,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgCGP8PmbgE.e-sHoi-9oVwP9FsHBaV2qAxL5zXnemQlwkC1vGfZLac",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -2071,12 +2118,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/financial/transfer",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/financial/transfer",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"financial",
@@ -2085,73 +2133,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "transfer_post_success",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"transfer_moviment\":{\n\t\t\"account_register_id_origin\": 2,\n\t\t\"account_register_id_destiny\": 1,\n\t\t\"moviment_amount\": 10.10\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/api/financial/transfer",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"financial",
-								"transfer"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "cache-control",
-							"value": "max-age=0, private, must-revalidate"
-						},
-						{
-							"key": "content-length",
-							"value": "56"
-						},
-						{
-							"key": "content-type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "date",
-							"value": "Sun, 08 Dec 2019 20:36:45 GMT"
-						},
-						{
-							"key": "server",
-							"value": "Cowboy"
-						},
-						{
-							"key": "x-request-id",
-							"value": "Fd5_xYe_U0C0O7wAAAAk"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"transfer_moviment\": {\n        \"id\": 11,\n        \"moviment_amount\": \"10.1\"\n    }\n}"
-				},
 				{
 					"name": "transfer_post_fail",
 					"originalRequest": {
@@ -2218,6 +2199,73 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"errors\": {\n        \"code\": 7007,\n        \"detail\": \"Conta de destino não localizada\"\n    }\n}"
+				},
+				{
+					"name": "transfer_post_success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"transfer_moviment\":{\n\t\t\"account_register_id_origin\": 2,\n\t\t\"account_register_id_destiny\": 1,\n\t\t\"moviment_amount\": 10.10\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/financial/transfer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"financial",
+								"transfer"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "content-length",
+							"value": "56"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 08 Dec 2019 20:36:45 GMT"
+						},
+						{
+							"key": "server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "x-request-id",
+							"value": "Fd5_xYe_U0C0O7wAAAAk"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"transfer_moviment\": {\n        \"id\": 11,\n        \"moviment_amount\": \"10.1\"\n    }\n}"
 				}
 			]
 		},
@@ -2229,7 +2277,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgCGP8PmbgE.e-sHoi-9oVwP9FsHBaV2qAxL5zXnemQlwkC1vGfZLac",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -2237,12 +2285,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/financial/balance?account_register_id=4",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/financial/balance?account_register_id=1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"financial",
@@ -2251,7 +2300,7 @@
 					"query": [
 						{
 							"key": "account_register_id",
-							"value": "4"
+							"value": "1"
 						}
 					]
 				}
@@ -2381,7 +2430,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAObWFyaWFAdGVzdC5jb21kAAJpZGECZAALaW5zZXJ0ZWRfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhBWQABGhvdXJhAWQAC21pY3Jvc2Vjb25kaAJiAASvOGEGZAAGbWludXRlYR1kAAVtb250aGEMZAAGc2Vjb25kYQ9kAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAAB0V0Yy9VVENkAAp1dGNfb2Zmc2V0YQBkAAR5ZWFyYgAAB-NkAAl6b25lX2FiYnJtAAAAA1VUQ2QACWlzX2FjdGl2ZWQABWZhbHNlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkU21xazVQaGQvSXJyZkxFSFphdkxFT2xtMHRWb014WmUucUh4aXNqVjJJUWp0RHdNUnFPUTZkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQVkAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgAErzhhBmQABm1pbnV0ZWEdZAAFbW9udGhhDGQABnNlY29uZGEPZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgCGP8PmbgE.e-sHoi-9oVwP9FsHBaV2qAxL5zXnemQlwkC1vGfZLac",
+							"value": "SFMyNTY.g3QAAAACZAAEZGF0YXQAAAALZAAIX19tZXRhX190AAAABmQACl9fc3RydWN0X19kABtFbGl4aXIuRWN0by5TY2hlbWEuTWV0YWRhdGFkAAdjb250ZXh0ZAADbmlsZAAGcHJlZml4ZAADbmlsZAAGc2NoZW1hZAAVRWxpeGlyLkJhbmsuQXV0aC5Vc2VyZAAGc291cmNlbQAAAAV1c2Vyc2QABXN0YXRlZAAGbG9hZGVkZAAKX19zdHJ1Y3RfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQAEGFjY291bnRfcmVnaXN0ZXJ0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGFjY291bnRfcmVnaXN0ZXJkAAlfX293bmVyX19kABVFbGl4aXIuQmFuay5BdXRoLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALYXV0aF90b2tlbnN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAthdXRoX3Rva2Vuc2QACV9fb3duZXJfX2QAFUVsaXhpci5CYW5rLkF1dGguVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAVlbWFpbG0AAAAPbWFyaWFAdGVzdGUuY29tZAACaWRhAWQAC2luc2VydGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAlpc19hY3RpdmVkAAR0cnVlZAAIcGFzc3dvcmRkAANuaWxkAA1wYXNzd29yZF9oYXNobQAAADwkMmIkMTIkYXU0cEh3Z0s3QkpRd3JLU0o5M0x5dWZjcjd6cjEwT20wRjVzRWlOeVguYUo1NDJ6QlRWWWFkAAp1cGRhdGVkX2F0dAAAAA1kAApfX3N0cnVjdF9fZAAPRWxpeGlyLkRhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQ1kAARob3VyYQFkAAttaWNyb3NlY29uZGgCYgABswhhBmQABm1pbnV0ZWELZAAFbW9udGhhDGQABnNlY29uZGEcZAAKc3RkX29mZnNldGEAZAAJdGltZV96b25lbQAAAAdFdGMvVVRDZAAKdXRjX29mZnNldGEAZAAEeWVhcmIAAAfjZAAJem9uZV9hYmJybQAAAANVVENkAAZzaWduZWRuBgDAH9n8bgE.Wd-6fl8p3dHX7bzXfZiXm91NbVBAlSSZrLuAGB_JXFk",
 							"type": "string"
 						}
 					]
@@ -2389,12 +2438,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/financial/statement?account_register_id=1&starting_date=2019-12-01&ending_date=2019-12-07",
-					"protocol": "http",
+					"raw": "https://banking.gigalixirapp.com/api/financial/statement?account_register_id=2&starting_date=2019-12-12&ending_date=2019-12-13",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"banking",
+						"gigalixirapp",
+						"com"
 					],
-					"port": "4000",
 					"path": [
 						"api",
 						"financial",
@@ -2403,15 +2453,15 @@
 					"query": [
 						{
 							"key": "account_register_id",
-							"value": "1"
+							"value": "2"
 						},
 						{
 							"key": "starting_date",
-							"value": "2019-12-01"
+							"value": "2019-12-12"
 						},
 						{
 							"key": "ending_date",
-							"value": "2019-12-07"
+							"value": "2019-12-13"
 						}
 					]
 				}
