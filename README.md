@@ -15,7 +15,7 @@ A API bancária destina-se à disponibilizar métodos que simulam os métodos b�
  - PostgreSQL
 
 ### Instalação
-Passos para instalação descritos em "INSTALL.MD"[PENDENTE CRIAÇÃO].
+Passos para deploy descritos em "DEPLOY.MD".
 
 ### Sobre a autenticação  
 Com exceção da criação de usuário e login, por segurança, os demais métodos necessitam de autenticação. Para esta API está sendo utilizado o _**Bearer Token**_, portanto ele deverá ser enviado na autenticação das chamadas nas quais for obrigatório.  
