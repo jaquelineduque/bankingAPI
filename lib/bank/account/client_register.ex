@@ -1,10 +1,9 @@
 defmodule Bank.Account.ClientRegister do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Bank.User
 
   schema "client_register" do
-    belongs_to :user, Bank.User
+    belongs_to :user, Bank.Auth.User
     field :cpf, :string
     field :date_of_birth, :date
     field :name, :string

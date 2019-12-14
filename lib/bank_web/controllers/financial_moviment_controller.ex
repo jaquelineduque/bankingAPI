@@ -3,7 +3,6 @@ defmodule BankWeb.FinancialMovimentController do
 
   alias Bank.Financial, as: Financial
   alias Bank.Financial.FinancialMoviment, as: FinancialMoviment
-  alias Bank.Financial.TransferMoviment, as: TransferMoviment
 
   action_fallback BankWeb.FallbackController
 

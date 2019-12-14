@@ -2,8 +2,6 @@ defmodule Bank.Account.AccountBalance do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Bank.Account.AccountRegister, as: AccountRegister
-
   schema "account_balance" do
     belongs_to :account_register, Bank.Account.AccountRegister
     field :balance_amount, :decimal

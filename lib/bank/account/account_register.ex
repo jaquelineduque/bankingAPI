@@ -2,9 +2,7 @@ defmodule Bank.Account.AccountRegister do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Bank.User
   alias Bank.Account.Helper, as: Helper
-  alias Bank.Account.AccountBalance, as: AccountBalance
 
   schema "account_register" do
     belongs_to :user, Bank.Auth.User
@@ -50,8 +48,5 @@ defmodule Bank.Account.AccountRegister do
     else
       changeset
     end
-  end
-
-  def changeset_activate_account(account_register, attrs) do
   end
 end

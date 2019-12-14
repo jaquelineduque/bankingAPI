@@ -9,7 +9,7 @@ defmodule Bank.Auth.User do
     field :password_hash, :string
     has_many :auth_tokens, Bank.AuthToken
     has_one :account_register, Bank.Account.AccountRegister
-    # has_many :client_register, Bank.ClientRegister
+    # has_one :client_register, Bank.ClientRegister
 
     # Add support for microseconds at the language level
     # for this specific schema

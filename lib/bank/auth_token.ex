@@ -2,12 +2,11 @@ defmodule Bank.AuthToken do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Bank.Auth.Use
   # alias Bank.AuthToken
-  alias Bank.User
+  # alias Bank.User
 
   schema "auth_tokens" do
-    belongs_to :user, User
+    belongs_to :user, Bank.Auth.User
     field :revoked, :boolean, default: false
     field :revoked_at, :utc_datetime
     field :token, :string
