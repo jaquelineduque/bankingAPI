@@ -25,7 +25,7 @@ mix release
   url: [host: "banking.gigalixirapp.com", port: 80],  
   cache_static_manifest: "priv/static/cache_manifest.json"  
 
-2.5. Crie na raiz do seu projeto um arquivo com o nome "elixir_buildpack.config" que irá conter as versões do Elixir e Erlang utilizadas. *
+2.5. Crie na raiz do seu projeto um arquivo com o nome "_elixir_buildpack.config_" que irá conter as versões do Elixir e Erlang utilizadas. *
 >elixir_version=1.9.2  
 erlang_version=22.0.7  
 
