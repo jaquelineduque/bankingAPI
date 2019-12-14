@@ -64,4 +64,5 @@ Observações:
 Links úteis:  
 [Gigalixir](https://gigalixir.com/)  
 [Como abrir um console no Gigalixir](https://readthedocs.org/projects/gigalixir/downloads/pdf/latest/)  
-[(Mix) "nmake" not found in the path issue - Windows](https://lazacode.org/1395/mix-nmake-not-found-in-the-path-issue-windows)  
+[(Mix) "nmake" not found in the path issue - Windows](https://lazacode.org/1395/mix-nmake-not-found-in-the-path-issue-windows) 
+[Banking API no Docker](https://hub.docker.com/r/jaquelineduque/bank) 
